@@ -1151,6 +1151,7 @@ function BookList() {
 ### 35. Key Prop<a id="35"> </a>
 
 - typically it's going to be id
+- In src/index.js, add id in obj
 
 ```js
 const books = [
@@ -1173,7 +1174,11 @@ function BookList() {
     <section className="booklist">
       {books.map((book) => {
         console.log(book);
+        // destructuring id
         const { img, title, author, id } = book;
+        {
+          /* Approach 1. Passing key to book component  */
+        }
         return <Book book={book} key={id} />;
       })}
     </section>
@@ -1181,12 +1186,16 @@ function BookList() {
 }
 ```
 
+---
+
+- another way of seting key, only work with list that never change, because when u try to remove item from list, eventually u'll get bugs
 - you will see index,but it's not advised if the list is changing
 
 ```js
 function BookList() {
   return (
     <section className="booklist">
+      {/* Approach 2. Passing key to map  */}
       {books.map((book, index) => {
         console.log(book);
         const { img, title, author, id } = book;
@@ -1199,7 +1208,126 @@ function BookList() {
 
 <br>
 
-### 36. Object as a Prop<a id="36"> </a>
+### 36.Pass Object as a Prop<a id="36"> </a>
+
+- render component
+- pass entire object
+- Destructuring (object)
+  [JS Nuggets - Destructuring (object)](https://www.youtube.com/watch?v=i4vhNKihfto&list=PLnHJACx3NwAfRUcuKaYhZ6T5NRIpzgNGJ&index=8&t=1s)
+
+```js
+function BookList() {
+  return (
+    <section className="booklist">
+      {books.map((book) => {
+        console.log(book);
+        const { img, title, author } = book;
+
+        {
+          /* Approach 1: passing entire obj as prop */
+        }
+        return <Book book={book} />;
+      })}
+    </section>
+  );
+}
+
+const Book = (props) => {
+  //a. destructuring props.books ie entire object inside function
+  const { img, title, author } = props.book;
+
+  return (
+    <article className="book">
+      <img src={img} alt={title} />
+      <h2>{title}</h2>
+      <h4>{author} </h4>
+    </article>
+  );
+};
+```
+
+- alternative
+
+```js
+//b. destructuring props.books ie entire object inside function parameter
+const Book = ({ book: { img, title, author } }) => {
+  return (
+    <article className="book">
+      <img src={img} alt={title} />
+      <h2>{title}</h2>
+      <h4>{author} </h4>
+    </article>
+  );
+};
+```
+
+---
+
+#### My Personal Preference
+
+- utilize spread operator (...) - copy values
+- Spread Operator
+- [JS Nuggets - Spread Operator](https://www.youtube.com/watch?v=4Zyr5a3m0Fc&list=PLnHJACx3NwAfRUcuKaYhZ6T5NRIpzgNGJ&index=10)
+- Usage ref.
+
+```js
+const friends = ["john", "peter", "anna"];
+const newFriends = [...friends, "susan"];
+console.log(friends);
+console.log(newFriends);
+const someObject = {
+  name: "john",
+  job: "developer",
+};
+// COPY NOT A REFERENCE !!!!
+const newObject = { ...someObject, location: "florida" };
+console.log(someObject);
+console.log(newObject);
+```
+
+---
+
+- In src/index.js
+
+```js
+function BookList() {
+  return (
+    <section className="booklist">
+      {books.map((book) => {
+        {
+          /* passing items one by one as props */
+        }
+        return <Book {...book} key={book.id} />;
+      })}
+    </section>
+  );
+}
+
+const Book = (props) => {
+  {
+    /* Approach 1: accessing props by destructuring inside function */
+  }
+  const { img, title, author } = props;
+  return (
+    <article className="book">
+      <img src={img} alt={title} />
+      <h2>{title}</h2>
+      <h4>{author} </h4>
+    </article>
+  );
+};
+```
+
+---
+
+```js
+{
+  /* Approach 2 :accessing props by destructuring inside function parameter */
+}
+const Book = ({ img, title, author }) => {
+  // rest of the code
+};
+```
 
 <br>
 
