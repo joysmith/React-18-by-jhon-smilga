@@ -1,26 +1,119 @@
-# React Fundamentals
+#### 14. [Intro](#14)
 
-#### React Course
+#### 15. [Github Repository](#15)
 
-[My React Course](https://www.udemy.com/course/react-tutorial-and-projects-course/?referralCode=FEE6A921AF07E2563CEF)
+#### 16. [Folder Structure](#16)
 
-#### Support
+#### 17. [Remove Boilerplate](#17)
 
-Find the Content Useful? [You can always buy me a coffee](https://www.buymeacoffee.com/johnsmilga)
+#### 18. [First Component](#18)
 
-#### Folder Structure
+#### 19. [Extensions and Settings](#19)
+
+#### 20. [Create Element Function](#20)
+
+#### 21. [JSX Rules](#21)
+
+#### 22. [Nest Components](#22)
+
+#### 23. [React Developer Tools](#23)
+
+#### 24. [BookList](#24)
+
+#### 25. [CSS](#25)
+
+#### 26. [Local Images (public folder)](#26)
+
+#### 27. [JSX - CSS](#27)
+
+#### 28. [JSX - Javascript](#28)
+
+#### 29. [Props - Basic Setup](#29)
+
+#### 30. [Props - Somewhat Dynamic Setup](#30)
+
+#### 31. [Props - Multiple Approaches](#31)
+
+#### 32. [Children Prop](#32)
+
+#### 33. [Simple List](#33)
+
+#### 34. [Proper List](#34)
+
+#### 35. [Key Prop](#35)
+
+#### 36. [Object as a Prop](#36)
+
+#### 37. [Event Basics](#37)
+
+#### 38. [Form Submission](#38)
+
+#### 39. [Form Submission - Button Example](#39)
+
+#### 40. [Anonymous Function (arrow)](#40)
+
+#### 41. [Components Feature](#41)
+
+#### 42. [Prop Drilling](#42)
+
+#### 43. [Complex Example - Intro](#43)
+
+#### 44. [Complex Example - Bug](#44)
+
+#### 45. [Complex Example - Fix](#45)
+
+#### 46. [ES6 Modules](#46)
+
+#### 47. [Local Images (src folder)](#47)
+
+#### 48. [Numbers Challenge](#48)
+
+#### 49. [Title Challenge](#49)
+
+#### 50. [Build Folder](#50)
+
+#### 51. [Deployment](#51)
+
+#### 73. [VITE - Intro](#73)
+
+#### 74. [VITE - Install / Setup](#74)
+
+<br>
+
+---
+
+### 14. Intro<a id="14"> </a>
+
+<br>
+
+### 15. Github Repository<a id="15"> </a>
+
+<br>
+
+### 16. Folder Structure<a id="16"> </a>
+
+- In 01-fundamental install dependency and run dev server
+
+```sh
+npm install
+npm start
+```
+
+---
 
 - node_modules
   Contains all dependencies required by the app. Main dependencies also listed in package.json
 
 - public
   Contains static assets including index.html (page template)
+
   - index.html
     - title
     - fonts
     - css
     - favicon
     - id="root" - our entire app
+
 - src
   In simplest form it's the brain of our app. This is where we will do all of our work. src/index.js is the JavaScript entry point.
 - .gitignore
@@ -37,7 +130,9 @@ Find the Content Useful? [You can always buy me a coffee](https://www.buymeacoff
 
 - zoom 175%
 
-#### Remove Boilerplate
+<br>
+
+### 17. Remove Boilerplate<a id="17"> </a>
 
 - remove src folder
 - create src folder
@@ -47,7 +142,11 @@ Find the Content Useful? [You can always buy me a coffee](https://www.buymeacoff
 - toggle sidebar CMD + B
 - shortcuts settings/keyboard shortcuts
 
-#### First Component
+<br>
+
+### 18. First Component<a id="18"> </a>
+
+> **_NOTE: Every time you need to create a component, think like I need to create function that return html/jsx_**
 
 ```js
 function Greeting() {
@@ -61,9 +160,11 @@ const Greeting = () => {
 };
 ```
 
-- starts with capital letter
+- starts component name with capital letter
 - must return JSX (html)
 - always close tag <Greeting/>
+
+---
 
 ##### Typical Component
 
@@ -76,9 +177,11 @@ const Greeting = () => {
 export default Greeting;
 ```
 
+---
+
 ##### Root Component (only one)
 
-index.js
+- In src/index.js
 
 ```js
 import React from "react";
@@ -93,20 +196,11 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<Greeting />);
 ```
 
-#### Possible Bug
+- go to "http://localhost:3000/"
 
-If for some reason you still have this error in the terminal
+  <br>
 
-```
-Module not found: Error: Can't resolve 'path/index.js'
-```
-
-Just restart the server
-
-- CTRL + C (stop the server)
-- "npm start" (start the dev server)
-
-#### Extensions and settings.json
+### 19. Extensions and Settings<a id="19"> </a>
 
 - Auto Rename Tag
 - Highlight Matching Tag
@@ -141,10 +235,14 @@ settings.json
   - rfce (regular func with export )
   - same as the file name
   - react auto import
-    - uncheck
-    - React Snippets › Settings: Import React On Top
+    - Setting > React Snippets > Settings: Import React On Top
+    - uncheck it, no loger need to import react, after version 17
 
-#### First Component in Detail
+<br>
+
+### 20. Create Element Function<a id="20"> </a>
+
+#### rules
 
 - capital letter
 - must return something
@@ -152,13 +250,9 @@ settings.json
   - to make our lives easier
   - calling function under the hood
 
-index.js
+---
 
-```js
-const Greeting = () => {
-  return React.createElement("h2", {}, "hello world");
-};
-```
+- In src/index.js
 
 ```js
 function Greeting() {
@@ -178,7 +272,9 @@ const Greeting = () => {
 };
 ```
 
-#### JSX Rules
+<br>
+
+### 21. JSX Rules (stuff that we are returning)<a id="21"> </a>
 
 - return single element (one parent element)
 
@@ -188,10 +284,12 @@ const Greeting = () => {
 ```js
 return <React.Fragment>...rest of the return</React.Fragment>;
 
-// shorthand
+// shorthand for React.Fragment
 
 return <>...rest of the return</>;
 ```
+
+---
 
 - camelCase property naming convention
 
@@ -203,6 +301,7 @@ return (
     <input readOnly={true} id='name' />
   </div>
 )
+
 // in html
 <div tabindex="1">
     <button onclick="myFunction()">click me</button>
@@ -217,6 +316,8 @@ return (
 return <div className="someValue">hello</div>;
 ```
 
+---
+
 - close every element
 
 ```js
@@ -224,6 +325,8 @@ return <img />;
 // or
 return <input />;
 ```
+
+---
 
 - formatting
   - opening tag in the same line as return or ()
@@ -247,7 +350,11 @@ function Greeting() {
 }
 ```
 
-#### Nest Components
+<br>
+
+### 22. Nest Components<a id="22"> </a>
+
+- In src/index.js
 
 ```js
 function Greeting() {
@@ -265,15 +372,20 @@ const Message = () => {
 };
 ```
 
-#### React Developer Tools
+<br>
+
+### 23. React Developer Tools<a id="23"> </a>
 
 - top right corner
 - more tools/extensions
-- open chrome web store
+- open chrome web store "react developer tool" install
+- open dev tool > components
 
-#### Book List
+<br>
 
-- setup structure
+### 24. BookList: Amazon Best seller Books<a id="24"> </a>
+
+- In src/index.js, setup structure
 
 ```js
 import React from "react";
@@ -301,9 +413,11 @@ const Book = () => {
 };
 
 const Image = () => <h2>image placeholder</h2>;
+
 const Title = () => {
   return <h2>Book Title</h2>;
 };
+
 const Author = () => <h4>Author</h4>;
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -311,12 +425,16 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<BookList />);
 ```
 
+---
+
 - in search engine type - 'amazon best selling books'
   [Amazon Best Sellers](https://www.amazon.com/Best-Sellers-Books/zgbs/books/)
 - DON'T NEED TO BUY ANYTHING !!!
 - NOT AN AFFILIATE LINK !!!!
 - choose a book
 - copy image, title and author
+
+- In src/index.js, provide value to Image, Title, Author component
 
 ```js
 import React from "react";
@@ -349,9 +467,11 @@ const Image = () => (
     alt="Interesting Facts For Curious Minds"
   />
 );
+
 const Title = () => {
   return <h2>Interesting Facts For Curious Minds</h2>;
 };
+
 const Author = () => <h4>Jordan Moore </h4>;
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -359,11 +479,14 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<BookList />);
 ```
 
-#### CSS
+<br>
 
-- create index.css in src
+### 25. CSS<a id="25"> </a>
+
+- In src-folder create index.css
 
 ```css
+/* default setup universal selector */
 * {
   margin: 0;
   padding: 0;
@@ -378,9 +501,10 @@ body {
 }
 ```
 
-- import file and add classes
+- In src/index.js, import css file with file extension and add classes
 
 ```js
+// import style
 import "./index.css";
 
 function BookList() {
@@ -405,7 +529,9 @@ const Book = () => {
 };
 ```
 
-- complete css
+---
+
+- In src/index.css, complete css
 
 ```css
 .booklist {
@@ -437,19 +563,21 @@ const Book = () => {
 }
 ```
 
-#### Local Images (Public Folder)
+<br>
 
-- Optional Video !!!
+### 26. Local Images (public folder)<a id="26"> </a>
 
-- external images (hosted on different server) - just need an url
-- local images (public folder) - less performant
-- local images (src folder) - better solution for assets,
+> **_Three ways to import images in our project_**
+
+- 1 external images (hosted on different server) - just need an url
+- 2 local images (public folder) - less performant
+- 3 local images (src folder) - better solution for assets,
   since under the hood they get optimized.
 
-- save image (Save Image As....)
+- download image from internet, save image (Save Image As....)
 - create images folder in public
 - copy/paste image
-- rename (optional)
+- rename image (optional)
 - replace url in the src - './images/imageName.extension'
 - './' because assets are on the same server
 
@@ -460,11 +588,14 @@ const Image = () => (
 ```
 
 - whatever assets we place in public - instantly available
-- domain(localhost)/asset
+- go to "domain(localhost)/asset"
 
-#### JSX - CSS (inline styles)
+<br>
 
-- style prop
+### 27. JSX - CSS<a id="27"> </a>
+
+- In src/index.js, look for Author component, then
+- use "style" prop
 - {} in JSX means going back to JS Land
 - value is an object with key/value pairs - capitalized and with ''
 
@@ -475,6 +606,8 @@ const Author = () => (
   </h4>
 );
 ```
+
+---
 
 - css rules still apply (inline vs external css)
 
@@ -487,11 +620,12 @@ const Author = () => (
 }
 ```
 
-- external libraries use inline css,
-  so if you want to make some changes,
-  reference the library docs and elements tab
+---
 
-- alternative option
+> **_external libraries use inline css, so if you want to make some changes, reference the library docs and elements tab_**
+
+- alternative option to write inline css style
+- NOTE: we can create css inline js-object inside/outside the component, and pass the reference in JSX return
 
 ```js
 const Author = () => {
@@ -507,10 +641,13 @@ const Author = () => {
 - FOR THE MOST PART, MULTIPLE APPROACHES AVAILABLE !!!
 - AS LONG AS THE RESULT IS THE SAME, REALLY COMES DOWN TO PREFERENCE !!!!
 
-#### JSX - Javascript
+<br>
 
-- refactor to single book component (personal preference)
-- remove inline css
+### 28. JSX - Javascript<a id="28"> </a>
+
+- In src/index.js
+  - refactor to single book component (personal preference)
+  - remove inline css
 
 ```js
 const Book = () => {
@@ -527,6 +664,10 @@ const Book = () => {
 };
 ```
 
+---
+
+- In src/index.css, move inline code there
+
 ```css
 .book h4 {
   color: #617d98;
@@ -540,20 +681,32 @@ const Book = () => {
 - value inside must be an expression (return value),
   can't be a statement
 
+- In src/index.js
+
 ```js
+// author outside the component
 const author = "Jordan Moore";
+
 const Book = () => {
+  // title inside the component
   const title = "Interesting Facts For Curious Mindssssss";
+
   return (
     <article className="book">
       <img
         src="./images/book-1.jpg"
         alt="Interesting Facts For Curious Minds"
       />
+
+      {/* reference title */}
       <h2>{title}</h2>
 
+      {/* reference author */}
       <h4>{author.toUpperCase()} </h4>
+
+      {/* This is a statement ⬇️ */}
       {/* <p>{let x = 6}</p> */}
+
       <p>{6 + 6}</p>
     </article>
   );
@@ -562,9 +715,12 @@ const Book = () => {
 
 - toggle line comment Edit/Toggle Line Comment
 
-#### Props - Initial Setup
+<br>
 
-- refactor/clean up
+### 29. Props - Basic Setup<a id="29"> </a>
+
+- In src/index.js
+  - refactor/clean up
 
 ```js
 const author = "Jordan Moore";
@@ -579,6 +735,7 @@ function BookList() {
     </section>
   );
 }
+
 const Book = () => {
   return (
     <article className="book">
@@ -590,6 +747,10 @@ const Book = () => {
 };
 ```
 
+---
+
+- function with input, only for reference
+
 ```js
 // parameters
 const someFunc = (param1, param2) => {
@@ -598,6 +759,10 @@ const someFunc = (param1, param2) => {
 // arguments
 someFunc("job", "developer");
 ```
+
+---
+
+- function with props, only for reference
 
 ```js
 const Book = (props) => {
@@ -618,8 +783,13 @@ const Book = (props) => {
 - pass as key/value pairs
 - if the prop exists it will return value, otherwise no value
 
+---
+
+- In src/index.js, setup props in Book component
+
 ```js
 function BookList() {
+  // passing props
   return (
     <section className="booklist">
       <Book job="developer" />
@@ -627,6 +797,8 @@ function BookList() {
     </section>
   );
 }
+
+// props setup
 const Book = (props) => {
   console.log(props);
   return (
@@ -642,7 +814,15 @@ const Book = (props) => {
 };
 ```
 
+---
+
+- In src/index.js, provide actual value
+
 ```js
+const author = "Jordan Moore";
+const title = "Interesting Facts For Curious Minds";
+const img = "./images/book-1.jpg";
+
 function BookList() {
   return (
     <section className="booklist">
@@ -651,6 +831,7 @@ function BookList() {
     </section>
   );
 }
+
 const Book = (props) => {
   console.log(props);
   return (
@@ -663,13 +844,16 @@ const Book = (props) => {
 };
 ```
 
-#### Props - Somewhat Dynamic Setup
+<br>
 
-- setup an object
-- refactor vars to properties
-- copy/paste and rename
-- get values for second book
-- setup props
+### 30. Props - Somewhat Dynamic Setup<a id="30"> </a>
+
+- In src/index.js
+  - create book object, and setup with properties
+  - refactor hardcoded variables to properties in object
+  - copy/paste and rename
+  - get values for second book
+  - setup props
 
 ```js
 const firstBook = {
@@ -677,6 +861,7 @@ const firstBook = {
   title: "Interesting Facts For Curious Minds",
   img: "./images/book-1.jpg",
 };
+
 const secondBook = {
   author: "James Clear",
   title: "Atomic Habits",
@@ -684,6 +869,7 @@ const secondBook = {
 };
 
 function BookList() {
+  // accessing book obj
   return (
     <section className="booklist">
       <Book
@@ -691,6 +877,7 @@ function BookList() {
         title={firstBook.title}
         img={firstBook.img}
       />
+
       <Book
         author={secondBook.author}
         title={secondBook.title}
@@ -699,6 +886,7 @@ function BookList() {
     </section>
   );
 }
+
 const Book = (props) => {
   console.log(props);
   return (
@@ -711,7 +899,9 @@ const Book = (props) => {
 };
 ```
 
-#### Access Props - Multiple Approaches
+<br>
+
+### 31. Props - Multiple Approaches<a id="31"> </a>
 
 - there is no right or wrong - again preference !!!
 
@@ -722,6 +912,8 @@ const Book = (props) => {
 - saves time/typing
 - pull out the properties
 - don't need to reference object anymore
+
+- ref
 
 ```js
 const someObject = {
@@ -738,8 +930,13 @@ console.log(job);
 - no need for all the props.propName
 - destructure inside component
 
+---
+
+- Ref. Approach 1: destructure props outside fuction signature
+
 ```js
 const Book = (props) => {
+  // destructure props
   const { img, title, author } = props;
   return (
     <article className="book">
@@ -751,6 +948,9 @@ const Book = (props) => {
 };
 ```
 
+---
+
+- Ref. Approach 2: destructure inside function signature
 - destructure in function parameters (in our case props)
 - if you have console.log(props) - it won't be defined
 
@@ -766,12 +966,15 @@ const Book = ({ img, title, author }) => {
 };
 ```
 
-#### Children Prop
+<br>
+
+### 32. Children Prop<a id="32"> </a>
 
 - everything we render between component tags
 - during the course we will mostly use it Context API
 - special prop, has to be "children"
 - can place anywhere in JSX
+- In src/index.js
 
 ```js
 function BookList() {
@@ -782,12 +985,14 @@ function BookList() {
         title={firstBook.title}
         img={firstBook.img}
       >
+        {/* How to pass children props */}
         <p>
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Itaque
           repudiandae inventore eos qui animi sed iusto alias eius ea sapiente.
         </p>
         <button>click me</button>
       </Book>
+
       <Book
         author={secondBook.author}
         title={secondBook.title}
@@ -808,11 +1013,15 @@ const Book = (props) => {
       <img src={img} alt={title} />
       <h2>{title}</h2>
       <h4>{author} </h4>
+
+      {/* access children props */}
       {children}
     </article>
   );
 };
 ```
+
+---
 
 - optional
 
@@ -820,6 +1029,7 @@ const Book = (props) => {
 @media screen and (min-width: 768px) {
   .booklist {
     grid-template-columns: repeat(3, 1fr);
+    /* Strech card depending on card content */
     align-items: start;
   }
 }
@@ -828,11 +1038,14 @@ const Book = (props) => {
 }
 ```
 
-#### Simple List
+<br>
+
+### 33. Simple List<a id="33"> </a>
 
 - [Javascript Nuggets - Map ](https://www.youtube.com/watch?v=80KX6aD9R7M&list=PLnHJACx3NwAfRUcuKaYhZ6T5NRIpzgNGJ&index=1)
 
-- refactor
+- In src/index.js
+  - refactor
 
 ```js
 const books = [
@@ -873,10 +1086,13 @@ function BookList() {
 }
 ```
 
-- map - creates a new array from calling a function for every array element.
+---
+
+- ref map method - creates a new array from calling a function for every array element.
 
 ```js
 const names = ["john", "peter", "susan"];
+
 const newNames = names.map((name) => {
   console.log(name);
   return <h1>{name}</h1>;
@@ -887,9 +1103,12 @@ function BookList() {
 }
 ```
 
-#### Proper List
+<br>
 
-- remove names and newNames
+### 34. Proper List<a id="34"> </a>
+
+- In src/index.js
+  - remove names and newNames
 
 ```js
 function BookList() {
@@ -927,7 +1146,9 @@ function BookList() {
 }
 ```
 
-#### Key Prop
+<br>
+
+### 35. Key Prop<a id="35"> </a>
 
 - typically it's going to be id
 
@@ -976,103 +1197,15 @@ function BookList() {
 }
 ```
 
-#### Pass The Entire Object
+<br>
 
-- render component
-- pass entire object
-- Destructuring (object)
-  [JS Nuggets - Destructuring (object)](https://www.youtube.com/watch?v=i4vhNKihfto&list=PLnHJACx3NwAfRUcuKaYhZ6T5NRIpzgNGJ&index=8&t=1s)
+### 36. Object as a Prop<a id="36"> </a>
 
-```js
-function BookList() {
-  return (
-    <section className="booklist">
-      {books.map((book) => {
-        console.log(book);
-        const { img, title, author } = book;
-        return <Book book={book} />;
-      })}
-    </section>
-  );
-}
+<br>
 
-const Book = (props) => {
-  const { img, title, author } = props.book;
+### 37. Event Basics<a id="37"> </a>
 
-  return (
-    <article className="book">
-      <img src={img} alt={title} />
-      <h2>{title}</h2>
-      <h4>{author} </h4>
-    </article>
-  );
-};
-```
-
-- alternative
-
-```js
-const Book = ({ book: { img, title, author } }) => {
-  return (
-    <article className="book">
-      <img src={img} alt={title} />
-      <h2>{title}</h2>
-      <h4>{author} </h4>
-    </article>
-  );
-};
-```
-
-#### My Personal Preference
-
-- utilize spread operator (...) - copy values
-- Spread Operator
-- [JS Nuggets - Spread Operator](https://www.youtube.com/watch?v=4Zyr5a3m0Fc&list=PLnHJACx3NwAfRUcuKaYhZ6T5NRIpzgNGJ&index=10)
-
-```js
-const friends = ["john", "peter", "anna"];
-const newFriends = [...friends, "susan"];
-console.log(friends);
-console.log(newFriends);
-const someObject = {
-  name: "john",
-  job: "developer",
-};
-// COPY NOT A REFERENCE !!!!
-const newObject = { ...someObject, location: "florida" };
-console.log(someObject);
-console.log(newObject);
-```
-
-```js
-function BookList() {
-  return (
-    <section className="booklist">
-      {books.map((book) => {
-        return <Book {...book} key={book.id} />;
-      })}
-    </section>
-  );
-}
-
-const Book = (props) => {
-  const { img, title, author } = props;
-  return (
-    <article className="book">
-      <img src={img} alt={title} />
-      <h2>{title}</h2>
-      <h4>{author} </h4>
-    </article>
-  );
-};
-const Book = ({ img, title, author }) => {
-  // rest of the code
-};
-```
-
-#### Events - Fundamentals
-
-- Vanilla JS
+- Vanilla JS setup
 
 ```js
 const btn = document.getElementById("btn");
@@ -1083,17 +1216,22 @@ btn.addEventListener("click", function (e) {
 });
 ```
 
+---
+
 - similar approach
-- element, event, function
+- element, event, callback-function
 - again camelCase
 
 ```js
 const EventExamples = () => {
+  // 3. callback function
   const handleButtonClick = () => {
     alert("handle button click");
   };
+
   return (
     <section>
+      {/* 1. button element,  2. event onCLick  */}
       <button onClick={handleButtonClick}>click me</button>
     </section>
   );
@@ -1106,6 +1244,10 @@ const EventExamples = () => {
   - onClick (click events)
   - onSubmit (submit form )
   - onChange (input change )
+
+---
+
+- In src/index.js, example
 
 ```js
 function BookList() {
@@ -1120,16 +1262,20 @@ function BookList() {
 }
 
 const EventExamples = () => {
+  //3. reference callback function
   const handleFormInput = () => {
     console.log("handle form input");
   };
+  //3. reference callback function
   const handleButtonClick = () => {
     alert("handle button click");
   };
+
   return (
     <section>
       <form>
         <h2>Typical Form</h2>
+        {/* 1. input element,  2. event onChange  */}
         <input
           type="text"
           name="example"
@@ -1137,30 +1283,40 @@ const EventExamples = () => {
           style={{ margin: "1rem 0" }}
         />
       </form>
+
+      {/* 1. button element,  2. event onCLick  */}
       <button onClick={handleButtonClick}>click me</button>
     </section>
   );
 };
 ```
 
-#### Event Object and Form Submission
+<br>
+
+### 38. Form Submission<a id="38"> </a>
+
+- The giant event object
+- In src/index.js
 
 ```js
 const EventExamples = () => {
   const handleFormInput = (e) => {
     console.log(e);
     // e.target - element
-    console.log(`Input Name : ${e.target.name}`);
-    console.log(`Input Value : ${e.target.value}`);
+    console.log(`Input Name : ${e.target.name}`); // key
+    console.log(`Input Value : ${e.target.value}`); //user entery value
     // console.log('handle form input');
   };
+
   const handleButtonClick = () => {
     alert("handle button click");
   };
+
   const handleFormSubmission = (e) => {
     e.preventDefault();
     console.log("form submitted");
   };
+
   return (
     <section>
       {/* add onSubmit Event Handler */}
@@ -1181,6 +1337,10 @@ const EventExamples = () => {
 };
 ```
 
+<br>
+
+### 39. Form Submission - Button Example<a id="39"> </a>
+
 - alternative approach
 
 ```js
@@ -1189,21 +1349,28 @@ const EventExamples = () => {
 </button>
 ```
 
+<br>
+
+### 40. Anonymous Function (arrow)<a id="40"> </a>
+
 #### Mind Grenade
 
 - alternative approach
-- pass anonymous function (in this case arrow function)
+- pass anonymous function (in this case arrow function) directly
 - one liner - less code
 
 ```js
 const EventExamples = () => {
   return (
     <section>
+      {/* passing arrow function directly to onClick event */}
       <button onClick={() => console.log("hello there")}>click me</button>
     </section>
   );
 };
 ```
+
+---
 
 - also can access event object
 
@@ -1226,6 +1393,10 @@ const EventExamples = () => {
 };
 ```
 
+<br>
+
+### 41. Components Feature<a id="41"> </a>
+
 #### Mind Grenade #2
 
 - remove EventsExamples
@@ -1244,14 +1415,15 @@ function BookList() {
 
 const Book = (props) => {
   const { img, title, author } = props;
+  // reference callback function
   const displayTitle = () => {
     console.log(title);
   };
 
   return (
     <article className="book">
-      <img src={img} alt={title} />
-      <h2>{title}</h2>
+      <img src={img} alt={
+
       <button onClick={displayTitle}>display title</button>
       <h4>{author} </h4>
     </article>
@@ -1259,22 +1431,30 @@ const Book = (props) => {
 };
 ```
 
-- remove button
+<br>
 
-#### Prop Drilling
+### 42. Prop Drilling<a id="42"> </a>
+
+- remove button
 
 - react data flow - can only pass props down
 - alternatives Context API, redux, other state libraries
+- In src/index.js
 
 ```js
 function BookList() {
   const someValue = "shakeAndBake";
+
   const displayValue = () => {
     console.log(someValue);
   };
+
   return (
     <section className="booklist">
       {books.map((book) => {
+        {
+          /* passing displayValue function as props */
+        }
         return <Book {...book} key={book.id} displayValue={displayValue} />;
       })}
     </section>
@@ -1288,6 +1468,8 @@ const Book = (props) => {
     <article className="book">
       <img src={img} alt={title} />
       <h2>{title}</h2>
+
+      {/* passing displayValue function as props */}
       <button onClick={displayValue}>click me</button>
       <h4>{author} </h4>
     </article>
@@ -1295,7 +1477,9 @@ const Book = (props) => {
 };
 ```
 
-#### More Complex Example
+<br>
+
+### 43. Complex Example - Intro<a id="43"> </a>
 
 - initial setup
 - create getBook function in booklist
@@ -1337,6 +1521,14 @@ const Book = (props) => {
   );
 };
 ```
+
+<br>
+
+### 44. Complex Example - Bug<a id="44"> </a>
+
+<br>
+
+### 45. Complex Example - Fix<a id="45"> </a>
 
 - two fixes
 - first option - setup wrapper
@@ -1381,9 +1573,11 @@ const Book = (props) => {
 };
 ```
 
-#### Import and Export Statements
+<br>
 
-- remove all getBook code
+### 46. ES6 Modules<a id="46"> </a>
+
+- In src/index.js remove all getBook code
 
 ```js
 function BookList() {
@@ -1410,11 +1604,12 @@ const Book = (props) => {
 };
 ```
 
-- setup two files in src books.js and Book.js
-- cut books array from index.js
-- add to books.js
+---
 
-books.js
+- setup two files in src books.js and Book.js
+- cut books array i.e our data from index.js, add to books.js
+
+- In src/books.js
 
 ```js
 const books = [
@@ -1433,12 +1628,14 @@ const books = [
 ];
 ```
 
+---
+
 - two flavors named and default exports
 
   - with named exports names MUST match
   - with default exports,can rename but only one per file
 
-- named export
+- use named export
 
 ```js
 export const books = [
@@ -1457,13 +1654,18 @@ export const books = [
 ];
 ```
 
-index.js
+---
+
+- In src/index.js, import books
 
 ```js
 import { books } from "./books";
 ```
 
-- default export
+---
+
+- Move component from index.js to Book.js
+- use default export
 
 ```js
 const Book = (props) => {
@@ -1482,21 +1684,27 @@ const Book = (props) => {
 export default Book;
 ```
 
-index.js
+---
+
+- In src/index.js import Book component
 
 ```js
 import Book from "./Book";
 ```
 
-#### Local Images (src folder)
+<br>
+
+### 47. Local Images (src folder)<a id="47"> </a>
 
 - better performance because optimized
 - add one more book to array
 - download all three images (rename)
 - setup images folder in the src
-- import all three images in the books.js
-- set image property equal to import
+- import all three images in the books.js one by one
 - and yes each image requires new import
+- set image property equal to import in each book-obj
+
+- In src/book.js
 
 ```js
 import img1 from "./images/book-1.jpg";
@@ -1525,26 +1733,36 @@ export const books = [
 ];
 ```
 
-#### Challenges
+<br>
+
+### 48. Numbers Challenge<a id="48"> </a>
 
 - setup numbers
 - don't worry about css
 - hint - index (second parameter in map)
 
-index.js
+- In src/index.js
 
 ```js
 const BookList = () => {
   return (
     <section className="booklist">
+      {/* passing down number */}
       {books.map((book, index) => {
         return <Book {...book} key={book.id} number={index} />;
       })}
     </section>
   );
 };
+```
 
+---
+
+- In src/Book.js
+
+```js
 const Book = (props) => {
+  // destructuring number
   const { img, title, author, number } = props;
 
   return (
@@ -1559,7 +1777,9 @@ const Book = (props) => {
 };
 ```
 
-index.css
+---
+
+- In src/index.css
 
 ```css
 .book {
@@ -1584,12 +1804,14 @@ index.css
 }
 ```
 
-#### Add Title
+<br>
+
+### 49. Title Challenge<a id="49"> </a>
 
 - add a title to our app (css optional)
 - change page title
 
-index.js
+- In src/index.js
 
 ```js
 function BookList() {
@@ -1606,7 +1828,9 @@ function BookList() {
 }
 ```
 
-index.css
+---
+
+- In src/index.css
 
 ```css
 h1 {
@@ -1616,85 +1840,40 @@ h1 {
 }
 ```
 
-public/index.html
+---
+
+- In public/index.html, change page title
 
 ```html
 <title>Best Sellers</title>
 ```
 
-#### Build Production Application
+<br>
+
+### 50. Build Folder<a id="50"> </a>
 
 - stop the dev server "ctrl + c"
 - run "npm run build"
 - build folder gets created
 
-#### Netlify
+<br>
+
+### 51. Deployment<a id="51"> </a>
 
 - sign up
-- add new site/deploy manually
-- choose build folder
+- add new site--> deploy manually
+- choose build folder from file system
 - rename site - site settings/change site name
 
-#### Create-React-App Boilerplate (src)
+<br>
 
-- index.js
+### 73. VITE - Intro<a id="73"> </a>
 
-```js
-import React from "react";
-import ReactDOM from "react-dom/client";
+- (Vite)[https://vitejs.dev/]
 
-// styles (typically global)
-import "./index.css";
+<br>
 
-// convention to name it App and setup in a separate file
-import App from "./App";
-// import report web vitals
-import reportWebVitals from "./reportWebVitals";
-
-// StrictMode
-
-// StrictMode is a tool for highlighting potential problems in an application.Activates additional checks and warnings for its descendants.Runs only in Development, does not impact the production build. RENDERS TWICE !!! Possible to remove.
-
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
-```
-
-- remove in src
-
-  - setupTests.js
-  - reportWebVitals.js
-  - App.test.js
-
-- be careful with multiple css files
-
-App.js
-
-```js
-function App() {
-  return <h1>backroads app</h1>;
-}
-
-export default App;
-```
-
-- remove
-  - remove logo.svg
-  - App.css
-
-#### Vite Docs
-
-(Vite)[https://vitejs.dev/]
-
-#### Vite Install
+### 74. VITE - Install / Setup<a id="74"> </a>
 
 ```sh
 npm create vite@latest app-name -- --template react
@@ -1706,10 +1885,17 @@ npm run dev
 
 #### Vite Setup
 
-- need to use .jsx extension
+- need to use .jsx extension for naming component
 - index.html in the source instead of public
 - assets still in public
 - instead of index.js, need to use main.jsx
 - to spin up dev server - "npm run dev"
 
 - rest the same - imports/exports, deployment, assets, etc...
+- to build project, then look into dist-folder
+
+```sh
+npm run build
+```
+
+<br>
