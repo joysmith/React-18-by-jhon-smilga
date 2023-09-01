@@ -865,11 +865,13 @@ import { useState } from "react";
 
 const ComponentExample = () => {
   const [value, setValue] = useState(0);
+
   const sayHello = () => {
     console.log("hello there");
     // be careful
     // setValue(value + 1);
   };
+
   sayHello();
   return (
     <div>
@@ -883,17 +885,34 @@ const ComponentExample = () => {
 export default ComponentExample;
 ```
 
+---
+
 - the problem starts when we update the state
 
 ```js
-const [value, setValue] = useState(0);
+import { useState } from "react";
 
-const sayHello = () => {
-  console.log("hello there");
-  // be careful, you will have infinite loop
-  setValue(value + 1);
+const ComponentExample = () => {
+  const [value, setValue] = useState(0);
+
+  const sayHello = () => {
+    console.log("hello there");
+    // be careful, you will have infinite loop
+    setValue(value + 1);
+  };
+
+  sayHello();
+
+  return (
+    <div>
+      <h1>value : {value}</h1>
+      <button className="btn" onClick={() => setValue(value + 1)}>
+        click me
+      </button>
+    </div>
+  );
 };
-sayHello();
+export default ComponentExample;
 ```
 
 - initial render - setup state value and invoke sayHello
@@ -913,17 +932,213 @@ sayHello();
 
 ### 94. UseEffect - Fundamentals<a id="94"></a>
 
+- In src/App.jsx setup import and container div
+
+```js
+import Starter from "./tutorial/02-useEffect/starter/02-useEffect-basics.jsx";
+
+function App() {
+  return (
+    <div className="container">
+      <Starter />
+    </div>
+  );
+}
+
+export default App;
+```
+
+---
+
+useEffect is a hook in React that allows you to perform side effects in function components.There is no need for urban dictionary - basically any work outside of the component. Some examples of side effects are: subscriptions, fetching data, directly updating the DOM, event listeners, timers, etc.
+
+- useEffect hook
+- accepts two arguments (second optional)
+- first argument - cb function
+- second argument - dependency array
+- by default runs on each render (initial and re-render)
+- cb can't return promise (so can't make it async)
+- if dependency array empty [] runs only on initial render
+
+- In src/tutorial/02-useEffect/starter/02-useEffect-basics.jsx
+
+```js
+import { useState, useEffect } from "react";
+
+const UseEffectBasics = () => {
+  const [value, setValue] = useState(0);
+  const sayHello = () => {
+    console.log("hello there");
+  };
+
+  sayHello();
+
+  // useEffect(() => {
+  //   console.log('hello from useEffect');
+  // });
+
+  // only going to run once, wont create infinity loop
+  useEffect(() => {
+    console.log("hello from useEffect");
+  }, []);
+
+  return (
+    <div>
+      <h1>value : {value}</h1>
+      <button className="btn" onClick={() => setValue(value + 1)}>
+        click me
+      </button>
+    </div>
+  );
+};
+export default UseEffectBasics;
+```
+
 <br>
 
 ### 95. UseEffect - Multiple Effects<a id="95"></a>
+
+- In src/App.jsx setup import and container div
+
+```js
+import Starter from "./tutorial/02-useEffect/starter/03-multiple-effects.jsx";
+function App() {
+  return (
+    <div className="container">
+      <Starter />
+    </div>
+  );
+}
+
+export default App;
+```
+
+---
+
+- In src/tutorial/02-useEffect/starter/03-multiple-effects.jsx
+
+```js
+import { useState, useEffect } from "react";
+
+const MultipleEffects = () => {
+  const [value, setValue] = useState(0);
+  const [secondValue, setSecondValue] = useState(0);
+
+  useEffect(() => {
+    console.log("hello from first useEffect");
+  }, [value]);
+
+  useEffect(() => {
+    console.log("hello from second useEffect");
+  }, [secondValue]);
+
+  return (
+    <div>
+      <h1>value : {value}</h1>
+      <button className="btn" onClick={() => setValue(value + 1)}>
+        value
+      </button>
+      <h1>second value : {secondValue}</h1>
+      <button className="btn" onClick={() => setSecondValue(secondValue + 1)}>
+        second value
+      </button>
+    </div>
+  );
+};
+export default MultipleEffects;
+```
 
 <br>
 
 ### 96. UseEffect Fetch Challenge - Intro<a id="96"></a>
 
+[Javascript Nuggets - Fetch API](https://www.youtube.com/watch?v=C_VIKzfpRrg&list=PLnHJACx3NwAfRUcuKaYhZ6T5NRIpzgNGJ&index=18&t=343s)
+
+- later in the course we will use axios
+
+Setup Challenge :
+
+- import useState and useEffect
+- setup state value
+  - users - default value []
+- setup useEffect
+- MAKE SURE IT RUNS ONLY ON INITIAL RENDER
+- in the cb, create a function which performs fetch functionality
+  - use url I provided in the starter file
+  - you can use .then or async
+  - set users equal to result
+  - iterate over the list and display image, user name and link
+- DON'T WORRY ABOUT CSS, MOST IMPORTANT LOGIC !!!
+
 <br>
 
 ### 97. UseEffect Fetch Challenge - Complete<a id="97"></a>
+
+- In src/App.jsx setup import and container div
+
+```js
+import Starter from "./tutorial/02-useEffect/starter/04-fetch-data.jsx";
+function App() {
+  return (
+    <div className="container">
+      <Starter />
+    </div>
+  );
+}
+
+export default App;
+```
+
+---
+
+- In src/tutorial/02-useEffect/starter/04-fetch-data.jsx
+
+```js
+import { useState, useEffect } from "react";
+
+const url = "https://api.github.com/users";
+
+const FetchData = () => {
+  const [users, setUsers] = useState([]);
+
+  // run only once when component load
+  useEffect(() => {
+    // you can also setup function outside
+    const fetchData = async () => {
+      try {
+        const response = await fetch(url);
+        const users = await response.json();
+        setUsers(users);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  // writing jsx part
+  return (
+    <section>
+      <h3>github users</h3>
+      <ul className="users">
+        {users.map((user) => {
+          const { id, login, avatar_url, html_url } = user;
+          return (
+            <li key={id}>
+              <img src={avatar_url} alt={login} />
+              <div>
+                <h5>{login}</h5>
+                <a href={html_url}>profile</a>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+    </section>
+  );
+};
+export default FetchData;
+```
 
 <br>
 
@@ -933,17 +1148,244 @@ sayHello();
 
 ### 99. Multiple Returns<a id="99"></a>
 
+- In src/App.jsx setup import and container div
+
+```js
+import Starter from "./tutorial/03-conditional-rendering/starter/01-multiple-returns-basics.jsx";
+
+function App() {
+  return (
+    <div className="container">
+      <Starter />
+    </div>
+  );
+}
+
+export default App;
+```
+
+---
+
+Vanilla JS
+
+```js
+const sayHello = (name) => {
+  // cond: if user provide the name, then
+  if (name) {
+    return `Hello, ${name}`;
+    // exit the function, skip rest of the code
+  }
+
+  // so if name provided, won't get to this line
+  return "Hello, there";
+};
+
+const firstResp = sayHello("john");
+console.log(firstResp); // Hello, john
+const secondResp = sayHello();
+console.log(secondResp); // Hello, there
+```
+
+---
+
+- In src/tutorial/03-conditional-rendering/starter/01-multiple-returns-basics.jsx
+- if no explicit return by default function returns 'undefined'
+
+```js
+import { useEffect, useState } from "react";
+
+const MultipleReturnsBasics = () => {
+  // while fetching data
+  // convention with boolean values "isSomething"
+  const [isLoading, setIsLoading] = useState(true);
+
+  // run only once when component load
+  useEffect(() => {
+    setTimeout(() => {
+      // done fetching data
+      setIsLoading(false);
+    }, 3000);
+  }, []);
+
+  // can return entire app
+  if (isLoading) {
+    return <h2>Loading...</h2>;
+  }
+
+  return <h2>My App</h2>;
+};
+export default MultipleReturnsBasics;
+```
+
 <br>
 
-### 100. Multiple Returns - Fetch Data Setup<a id='100'></a>
+### 100. Multiple Returns - Fetch Data Setup, Part 1<a id='100'></a>
+
+- In src/App.jsx setup import and container div
+
+```js
+import Starter from "./tutorial/03-conditional-rendering/starter/02-multiple-returns-fetch-data.jsx";
+
+function App() {
+  return (
+    <div className="container">
+      <Starter />
+    </div>
+  );
+}
+
+export default App;
+```
+
+---
+
+Setup Challenge :
+
+- practice on setting up state values and data fetching
+- create state variable
+  - user - default value null
+- fetch data from the url (for now just log result)
+- if you see user object in the console, continue with the videos
+
+- In src/tutorial/03-conditional-rendering/starter/02-multiple-returns-fetch-data.jsx"
+
+```js
+import { useEffect, useState } from "react";
+const url = "https://api.github.com/users/QuincyLarson";
+
+const MultipleReturnsFetchData = () => {
+  const [user, setUser] = useState(null);
+
+  // run only once when component load
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const resp = await fetch(url);
+        const user = await resp.json();
+        console.log(user);
+      } catch (error) {
+        // fetch only cares about network errors
+        // will work with axios
+        console.log(error);
+      }
+    };
+    fetchUser();
+  }, []);
+
+  return <h2>Fetch Example</h2>;
+};
+export default MultipleReturnsFetchData;
+```
 
 <br>
 
-### 101. Multiple Returns - Fetch Data<a id='101'></a>
+### 101. Multiple Returns - Fetch Data, Part 2<a id='101'></a>
+
+Data Fetching :
+
+- usually three options
+
+  - loading - waiting for data to arrive (display loading state)
+  - error - there was an error (display error message)
+  - success - received data (display data)
+
+- In src/App.jsx setup import and container div
+
+```js
+import Starter from "./tutorial/03-conditional-rendering/starter/02-multiple-returns-fetch-data.jsx";
+
+function App() {
+  return (
+    <div className="container">
+      <Starter />
+    </div>
+  );
+}
+
+export default App;
+```
+
+---
+
+- In src/tutorial/03-conditional-rendering/starter/02-multiple-returns-fetch-data.jsx"
+
+```js
+import { useEffect, useState } from "react";
+const url = "https://api.github.com/users/QuincyLarson";
+
+const MultipleReturnsFetchData = () => {
+  // convention to setup booleans with isSomething
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const resp = await fetch(url);
+        const user = await resp.json();
+        // console.log(user);
+        setUser(user);
+      } catch (error) {
+        setIsError(true);
+        console.log(error);
+      }
+      // hide loading
+      setIsLoading(false);
+    };
+    fetchUser();
+  }, []);
+
+  // order matters
+  // don't place user JSX before loading or error
+  if (isLoading) {
+    return <h2>Loading...</h2>;
+  }
+
+  if (isError) {
+    return <h2>There was an error...</h2>;
+  }
+
+  return (
+    <div>
+      <img
+        style={{ width: "150px", borderRadius: "25px" }}
+        src={user.avatar_url}
+        alt={user.name}
+      />
+      <h2>{user.name}</h2>
+      <h4>works at {user.company}</h4>
+      <p>{user.bio}</p>
+    </div>
+  );
+};
+
+export default MultipleReturnsFetchData;
+```
 
 <br>
 
-### 102. Fetch Error "Gotcha"<a id='102'></a>
+### 102. Fetch Error "Gotcha" (Optional) <a id='102'></a>
+
+Unlike for example Axios, by default, the fetch() API does not consider HTTP status codes in the 4xx or 5xx range to be errors. Instead, it considers these status codes to be indicative of a successful request,
+
+```js
+try {
+const resp = await fetch(url);
+// console.log(resp);
+
+if (!resp.ok) {
+  setIsError(true);
+  setIsLoading(false);
+  return;
+}
+
+const user = await resp.json();
+setUser(user);
+
+}
+
+```
 
 <br>
 
