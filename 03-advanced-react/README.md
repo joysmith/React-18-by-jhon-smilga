@@ -1391,53 +1391,892 @@ setUser(user);
 
 ### 103. Order Matters<a id='103'></a>
 
+- In src/tutorial/03-conditional-rendering/starter/02-multiple-returns-fetch-data.jsx"
+
+```js
+import Starter from "./tutorial/03-conditional-rendering/starter/02-multiple-returns-fetch-data.jsx";
+```
+
+Please don't dismiss this topic. A lot of questions in course Q&A.
+
+Challenge :
+
+- destructure properties and remove user from JSX
+- you might or might not encounter the bug
+
+```js
+return (
+  <div>
+    <img
+      style={{ width: "100px", borderRadius: "25px" }}
+      src={avatar_url}
+      alt={name}
+    />
+    <h2>{name}</h2>
+    <h4>works at {company}</h4>
+    <p>{bio}</p>
+  </div>
+);
+```
+
+---
+
+Please don't dismiss this topic. A lot of questions in course Q&A.
+
+Challenge :
+
+- destructure properties and remove user from JSX
+- you might or might not encounter the bug
+
+```js
+import { useEffect, useState } from "react";
+import Starter from "./tutorial/03-conditional-rendering/starter/02-multiple-returns-fetch-data.jsx";
+
+const url = "https://api.github.com/users/QuincyLarson";
+
+const MultipleReturnsFetchData = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const resp = await fetch(url);
+        // console.log(resp);
+        if (!resp.ok) {
+          setIsError(true);
+          setIsLoading(false);
+          return;
+        }
+
+        const user = await resp.json();
+        setUser(user);
+      } catch (error) {
+        setIsError(true);
+        // console.log(error);
+      }
+      // hide loading
+      setIsLoading(false);
+    };
+    fetchUser();
+  }, []);
+
+  // order matters
+  // don't place user JSX before loading or error
+
+  if (isLoading) {
+    return <h2>Loading...</h2>;
+  }
+  if (isError) {
+    return <h2>There was an error...</h2>;
+  }
+
+  // destructuring user data received from Network
+  const { avatar_url, name, company, bio } = user;
+  return (
+    <div>
+      <img
+        style={{ width: "150px", borderRadius: "25px" }}
+        src={avatar_url}
+        alt={name}
+      />
+      <h2>{name}</h2>
+      <h4>works at {company}</h4>
+      <p>{bio}</p>
+    </div>
+  );
+};
+export default MultipleReturnsFetchData;
+```
+
+---
+
+##### Order Matters - Solution
+
+- before returns from Network
+
+```js
+const [user, setUser] = useState(null);
+console.log(user); // still null
+// we can't pull out properties from null
+const { avatar_url, name, company, bio } = user;
+```
+
+- after returns from Network
+
+```js
+console.log(user); // user object;
+const { avatar_url, name, company, bio } = user;
+```
+
+```js
+return (
+  <div>
+    <img
+      style={{ width: "100px", borderRadius: "25px" }}
+      src={avatar_url}
+      alt={name}
+    />
+    <h2>{name}</h2>
+    <h4>works at {company}</h4>
+    <p>{bio}</p>
+  </div>
+);
+```
+
+---
+
+Vanilla JS
+
+```js
+const someObject = {
+  name: "jo koy",
+};
+// this is cool
+someObject.name; // returns 'jo koy'
+someObject.propertyThatDoesNotExist; // returns undefined
+
+// not cool at all, javascript will scream, yell and complain
+const randomValue = null;
+randomValue.name;
+
+// this is ok
+const randomList = [];
+console.log(randomList[0]); // returns undefined
+
+// not cool at all, javascript will scream, yell and complain
+console.log(randomList[0].name);
+```
+
 <br>
 
 ### 104. Fetch Function Location<a id='104'></a>
+
+- The question is can we place or define fetchData async function outside the useEffect
+- Yes we can but we shouldn't do, becuse if place outside then we have to place fetchData in dependeny array [fetchData] in 2nd args, that will trigger infinity loop
+
+```js
+const fetchData = async () => {
+  // fetch data
+};
+
+useEffect(() => {
+  fetchData();
+}, []);
+```
+
+- DON'T ADD fetchData to dependency array !!!
+- IT WILL TRIGGER INFINITE LOOP !!!
 
 <br>
 
 ### 105. React Hooks Rules<a id='105'></a>
 
+- In src/App.jsx setup import and container div
+
+```js
+import Starter from "./tutorial/03-conditional-rendering/starter/03-hooks-rule.jsx";
+
+function App() {
+  return (
+    <div className="container">
+      <Starter />
+    </div>
+  );
+}
+
+export default App;
+```
+
+---
+
+- In src/tutorial/03-conditional-rendering/starter/03-hooks-rule.jsx"
+
+```js
+import { useState, useEffect } from "react";
+
+const Example = () => {
+  const [condition, setCondition] = useState(true);
+  if (condition) {
+    // won't work
+    const [state, setState] = useState(false);
+  }
+
+  if (condition) {
+    return <h2>Hello There</h2>;
+  }
+
+  // this will also fail, useState after if condition
+  useEffect(() => {
+    console.log("hello there");
+  }, []);
+  return <h2>example</h2>;
+};
+
+export default Example;
+```
+
 <br>
 
 ### 106. Vanilla.js (Optional)<a id='106'></a>
+
+Vanilla JS
+
+In JavaScript, a value is considered "truthy" if the condition is evaluated to true when used in a boolean context. A value is considered "falsy" if the condition is evaluated to false when used in a boolean context.
+
+##### Here is a list of values that are considered falsy in JavaScript:
+
+- false
+- 0 (zero)
+- "" (empty string)
+- null
+- undefined
+- NaN (Not a Number)
+
+##### All other values, including objects and arrays, are considered truthy.
+
+For example:
+
+```js
+const x = "Hello";
+const y = "";
+const z = 0;
+
+if (x) {
+  console.log("x is truthy");
+}
+
+if (y) {
+  console.log("y is truthy");
+} else {
+  console.log("y is falsy");
+}
+
+if (z) {
+  console.log("z is truthy");
+} else {
+  console.log("z is falsy");
+}
+
+// Output:
+// "x is truthy"
+// "y is falsy"
+// "z is falsy"
+```
+
+In this example, the variable x is a non-empty string, which is considered truthy, so the first if statement is executed. The variable y is an empty string, which is considered falsy, so the else block of the second if statement is executed. The variable z is the number 0, which is considered falsy, so the else block of the third if statement is executed.
+
+---
+
+Vanilla JS
+
+In JavaScript, short-circuit evaluation is a technique that allows you to use logical operators (such as && and ||) to perform conditional evaluations in a concise way.
+
+The && operator (logical AND) returns the first operand if it is "falsy", or the second operand if the first operand is "truthy".
+
+For example:
+
+```js
+const x = 0;
+const y = 1;
+
+console.log(x && y); // Output: 0 (the first operand is falsy, so it is returned)
+console.log(y && x); // Output: 0 (the second operand is falsy, so it is returned)
+```
+
+The || operator (logical OR) returns the first operand if it is "truthy", or the second operand if the first operand is "falsy".
+
+For example:
+
+```js
+const x = 0;
+const y = 1;
+
+console.log(x || y); // Output: 1 (the first operand is falsy, so the second operand is returned)
+console.log(y || x); // Output: 1 (the first operand is truthy, so it is returned)
+```
+
+Short-circuit evaluation can be useful in cases where you want to perform a certain action only if a certain condition is met, or you want to return a default value if a certain condition is not met.
+
+For example:
+
+```js
+function displayName(name) {
+  return name || "Anonymous";
+}
+
+console.log(displayName("Pizza")); // Output: "Pizza"
+console.log(displayName()); // Output: "Anonymous"
+```
+
+In this example, the displayName() function returns the name property of the user object if it exists, or "Anonymous" if the name property is not present. This is done using the || operator and short-circuit evaluation.
 
 <br>
 
 ### 107. Short Circuit - Overview<a id='107'></a>
 
+- In src/App.jsx
+
+```js
+import Starter from "./tutorial/03-conditional-rendering/starter/04-short-circuit-overview.jsx";
+
+function App() {
+  return (
+    <div className="container">
+      <Starter />
+    </div>
+  );
+}
+
+export default App;
+```
+
+---
+
+- In src/tutorial/03-conditional-rendering/starter/04-short-circuit-overview.jsx"
+
+Setup Challenge :
+
+- create two state values
+- one "falsy" and second "truthy"
+- setup both conditions for each operator in JSX - hint {}
+  - || OR
+  - && AND
+
+```js
+import { useState } from "react";
+
+const ShortCircuitOverview = () => {
+  // falsy
+  const [text, setText] = useState("");
+  // truthy
+  const [name, setName] = useState("susan");
+
+  const codeExample = text || "hello world";
+
+  // can't use if statements
+  return (
+    <div>
+      {/* {if(someCondition){"won't work"}} */}
+
+      <h4>Falsy OR : {text || "hello world"}</h4>
+      <h4>Falsy AND {text && "hello world"}</h4>
+      <h4>Truthy OR {name || "hello world"}</h4>
+      <h4>Truthy AND {name && "hello world"}</h4>
+      {codeExample}
+    </div>
+  );
+};
+export default ShortCircuitOverview;
+```
+
 <br>
 
 ### 108. Short Circuit - Examples<a id='108'></a>
+
+- In src/App.jsx
+
+```js
+import Starter from "./tutorial/03-conditional-rendering/starter/05-short-circuit-examples.jsx";
+
+function App() {
+  return (
+    <div className="container">
+      <Starter />
+    </div>
+  );
+}
+
+export default App;
+```
+
+---
+
+Vanilla JS (Optional)
+The ! operator is a logical operator in JavaScript that negates a boolean value. It is equivalent to the not operator in other programming languages.
+
+For example:
+
+```js
+let isTrue = true;
+let isFalse = false;
+
+console.log(!isTrue); // outputs: false
+console.log(!isFalse); // outputs: true
+```
+
+You can use the ! operator to test if a value is not truthy or falsy:
+
+```js
+let val = 0;
+if (!val) {
+  console.log("val is falsy");
+}
+```
+
+You can also use the ! operator to convert a value to a boolean and negate it:
+
+```js
+let val = "hello";
+let bool = !val; // bool is now false
+
+val = "";
+bool = !val; // bool is now true
+```
+
+---
+
+- In src/tutorial/03-conditional-rendering/starter/05-short-circuit-examples.jsx"
+
+```js
+import { useState } from "react";
+
+const ShortCircuitOverview = () => {
+  // falsy
+  const [text, setText] = useState("");
+  // truthy
+  const [name, setName] = useState("susan");
+  const [user, setUser] = useState({ name: "john" });
+  const [isEditing, setIsEditing] = useState(false);
+
+  // can't use if statements
+  // Usage on how to render value based on truthy and false value
+  return (
+    <div>
+      <h2>{text || "default value"}</h2>
+
+      {text && (
+        <div>
+          <h2> whatever return</h2>
+          <h2>{name}</h2>
+        </div>
+      )}
+
+      {/* NOT operator  */}
+      {!text && (
+        <div>
+          <h2> whatever return</h2>
+          <h2>{name}</h2>
+        </div>
+      )}
+
+      {user && <SomeComponent name={user.name} />}
+
+      <h2 style={{ margin: "1rem 0" }}>Ternary Operator</h2>
+
+      <button className="btn">{isEditing ? "edit" : "add"}</button>
+
+      {user ? (
+        <div>
+          <h4>hello there user {user.name}</h4>
+        </div>
+      ) : (
+        <div>
+          <h2>please login</h2>
+        </div>
+      )}
+    </div>
+  );
+};
+
+const SomeComponent = ({ name }) => {
+  return (
+    <div>
+      <h4>hello there, {name}</h4>
+      <button className="btn">log out</button>
+    </div>
+  );
+};
+
+export default ShortCircuitEvaluation;
+```
 
 <br>
 
 ### 109. Ternary Operator<a id='109'></a>
 
+Vanilla JS
+
+In JavaScript, the ternary operator is a way to concisely express a simple conditional statement. It is often called the "conditional operator" or the "ternary conditional operator".
+
+Here is the basic syntax for using the ternary operator:
+
+```js
+condition ? expression1 : expression2;
+```
+
+If condition is truthy, the operator will return expression1. If condition is falsy, it will return expression2.
+
+Jobster Example
+
+[Jobster ](https://redux-toolkit-jobster.netlify.app/landing)
+
 <br>
 
 ### 110. Toggle Challenge<a id='110'></a>
+
+- In src/App.jsx
+
+```js
+import Starter from "./tutorial/03-conditional-rendering/starter/06-toggle-challenge.jsx";
+
+function App() {
+  return (
+    <div className="container">
+      <Starter />
+    </div>
+  );
+}
+
+export default App;
+```
+
+---
+
+- In src/tutorial/03-conditional-rendering/starter/06-toggle-challenge.jsx"
+
+- create state value (boolean)
+- return a button and a component/element
+- when user clicks the button
+  - toggle state value
+  - conditionally render component/element
+
+Initial Setup
+
+```js
+import { useState } from "react";
+
+const ToggleChallenge = () => {
+  const [showAlert, setShowAlert] = useState(false);
+
+  const toggleAlert = () => {
+    if (showAlert) {
+      setShowAlert(false);
+      return;
+    }
+    setShowAlert(true);
+  };
+
+  return (
+    <div>
+      <button className="btn" onClick={toggleAlert}>
+        toggle alert
+      </button>
+      {showAlert && <Alert />}
+    </div>
+  );
+};
+
+const Alert = () => {
+  return <div className="alert alert-danger">hello world</div>;
+};
+export default ToggleChallenge;
+```
+
+---
+
+- Improvements in one line
+
+```js
+<button className='btn' onClick={() => setShowAlert(!showAlert)}>
+```
 
 <br>
 
 ### 111. User Challenge<a id='111'></a>
 
+- In src/App.jsx
+
+```js
+import Starter from "./tutorial/03-conditional-rendering/starter/07-user-challenge.jsx";
+
+function App() {
+  return (
+    <div className="container">
+      <Starter />
+    </div>
+  );
+}
+
+export default App;
+```
+
+---
+
+- In src/tutorial/03-conditional-rendering/starter/07-user-challenge.jsx"
+
+- create state value
+  - user - default value null
+- create two functions
+  - login - set's user equal to object with name property
+  - logout - set's user equal to null
+- in jsx use ? to display two different setups
+
+- h4 with "hello there, user name" and logout button
+- h4 with "please login " and login button
+
+```js
+import { useState } from "react";
+
+const UserChallenge = () => {
+  const [user, setUser] = useState(null);
+
+  const login = () => {
+    // normally connect to db or api
+    setUser({ name: "vegan food truck" });
+  };
+  const logout = () => {
+    setUser(null);
+  };
+
+  return (
+    <div>
+      {user ? (
+        <div>
+          <h4>hello there, {user.name}</h4>
+          <button className="btn" onClick={logout}>
+            logout
+          </button>
+        </div>
+      ) : (
+        <div>
+          <h4>Please Login</h4>
+          <button className="btn" onClick={login}>
+            login
+          </button>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default UserChallenge;
+```
+
 <br>
 
 ### 112. UseEffect Cleanup Function - Setup/Challenge<a id='112'></a>
+
+- In src/App.jsx
+
+```js
+import Starter from "./tutorial/02-useEffect/starter/05-cleanup-function.jsx";
+
+function App() {
+  return (
+    <div className="container">
+      <Starter />
+    </div>
+  );
+}
+
+export default App;
+```
+
+---
+
+- In ./tutorial/02-useEffect/starter/05-cleanup-function.jsx"
+
+Will Cover After 03-conditional-rendering
+
+- Setup Challenge :
+
+- create state value
+- in jsx return button which toggles state value
+- based on condition return second component (simple return)
+- inside second component create useEffect and run it only on initial render
+
+```js
+import { useEffect, useState } from "react";
+
+const CleanupFunction = () => {
+  const [toggle, setToggle] = useState(false);
+
+  return (
+    <div>
+      <button className="btn" onClick={() => setToggle(!toggle)}>
+        toggle component
+      </button>
+
+      {toggle && <RandomComponent />}
+    </div>
+  );
+};
+
+const RandomComponent = () => {
+  useEffect(() => {
+    console.log("hmm, this is interesting");
+  }, []);
+  return <h1>hello there</h1>;
+};
+
+export default CleanupFunction;
+```
+
+- Notes: everytime we toggle button the RandomComponent will mount and unmount, that cause initial render to run again and again.
+- The re-render is not working here, thats why usage of useEffect that run only once in this setup make no sense
 
 <br>
 
 ### 113. UseEffect - Timer Example<a id='113'></a>
 
+Vanilla JS
+
+```js
+const intID = setInterval(() => {
+  console.log("hello from interval");
+}, 1000);
+clearInterval(intID);
+```
+
+- In src/App.jsx
+
+```js
+import Starter from "./tutorial/02-useEffect/starter/05-cleanup-function.jsx";
+
+function App() {
+  return (
+    <div className="container">
+      <Starter />
+    </div>
+  );
+}
+
+export default App;
+```
+
+---
+
+- In ./tutorial/02-useEffect/starter/05-cleanup-function.jsx"
+
+```js
+import { useEffect, useState } from "react";
+
+const CleanupFunction = () => {
+  const [toggle, setToggle] = useState(false);
+  return (
+    <div>
+      <button className="btn" onClick={() => setToggle(!toggle)}>
+        toggle component
+      </button>
+      {toggle && <RandomComponent />}
+    </div>
+  );
+};
+
+const RandomComponent = () => {
+  useEffect(() => {
+    // console.log('hmm, this is interesting');
+    const intID = setInterval(() => {
+      console.log("hello from interval");
+    }, 1000);
+
+    // does not stop, keeps going
+    // every time we render component new interval gets created
+
+    // how to use cleanup function to clean background interval
+    return () => clearInterval(intID);
+  }, []);
+
+  return <h1>hello there</h1>;
+};
+
+export default CleanupFunction;
+```
+
 <br>
 
 ### 114. UseEffect - Event Listeners Example<a id='114'></a>
 
+```js
+const someFunc = () => {
+  // some logic here
+};
+window.addEventListener("scroll", someFunc);
+window.removeEventListener("scroll", someFunc);
+```
+
+---
+
+- In src/App.jsx
+
+```js
+import Starter from "./tutorial/02-useEffect/starter/05-cleanup-function.jsx";
+
+function App() {
+  return (
+    <div className="container">
+      <Starter />
+    </div>
+  );
+}
+
+export default App;
+```
+
+---
+
+- In ./tutorial/02-useEffect/starter/05-cleanup-function.jsx"
+
+```js
+import { useEffect, useState } from "react";
+
+const CleanupFunction = () => {
+  const [toggle, setToggle] = useState(false);
+  return (
+    <div>
+      <button className="btn" onClick={() => setToggle(!toggle)}>
+        toggle component
+      </button>
+      {toggle && <RandomComponent />}
+    </div>
+  );
+};
+
+const RandomComponent = () => {
+  useEffect(() => {
+    // console.log('hmm, this is interesting');
+    const someFunc = () => {
+      // some logic here
+    };
+    window.addEventListener("scroll", someFunc);
+
+    // how to use cleanup function to clean background scroll
+    return () => window.removeEventListener("scroll", someFunc);
+  }, []);
+
+  return <h1>hello there</h1>;
+};
+
+export default CleanupFunction;
+```
+
 <br>
 
 ### 115. You Might Not Need an Effect<a id='115'></a>
+
+[You Might Not Need an Effect](https://beta.reactjs.org/learn/you-might-not-need-an-effect)
+
+- will still utilize useEffect
+- there is still plenty of code using useEffect
+
+- fetching data
+  replaced by libraries - react query, rtk query, swr or next.js
+
+```js
+import { useHook } from "library";
+
+function Example() {
+  const { data, error, isLoading } = useHook("url", fetcher);
+
+  if (error) return <div>failed to load</div>;
+  if (isLoading) return <div>loading...</div>;
+  return <div>hello {data.name}!</div>;
+}
+```
+
+- rest of them by refactoring code
 
 <br>
 
@@ -1446,6 +2285,35 @@ setUser(user);
 <br>
 
 ### 117. Project Structure - Folder Example<a id='117'></a>
+
+/tutorial/04-project-structure/starter
+
+There are more options
+
+Normally somewhere in the src
+
+/components/componentName.jsx
+/screens/componentName.jsx
+
+- create navbar folder
+
+  - setup Navbar.jsx (component)
+  - Navbar.css (styles)
+
+- import in App.jsx
+
+import Final from 'pathToFolder/Navbar/Navbar'
+
+- first solution rename to index.jsx(entry point)
+
+Works but eventually too many index tabs :):):)
+
+- rename back to Navbar.jsx
+- create index.jsx
+
+```js
+export { default } from "./Navbar";
+```
 
 <br>
 
