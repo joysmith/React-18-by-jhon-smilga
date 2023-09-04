@@ -22,9 +22,69 @@
 
 ### 209. Slider - Setup<a id="209"></a>
 
+#### Figma URL
+
+[Slider](https://www.figma.com/file/QfMzzThSYmgabSvn4t8Yfe/Slider?node-id=0%3A1&t=IpsYjMUn3Xj3Hs3N-1)
+
+- install deps
+
+```sh
+npm install
+```
+
+- spin up dev server
+
+```sh
+npm run dev
+```
+
 <br>
 
 ### 210. Slider - Structure<a id="210"></a>
+
+##### Steps
+
+#### Explore Data
+
+Explore arrays in data.js
+
+#### Import Data and Set State Value
+
+Create Carousel.jsx, import all arrays from data.js and set up state value using the useState hook, use shortList as default value (for now).
+
+#### Setup Container and Prev/Next Buttons
+
+In the return statement, set up a container element to hold all the slides. Inside the container, iterate over the people state value to create each slide.
+
+Set up prev and next buttons outside the container element. You can use the onClick event to trigger functions that will change the current slide.
+
+---
+
+- In src folder create Carousel.jsx -rafce
+- In src/App.jsx,
+
+```js
+import Carousel from "./Carousel";
+import SlickCarousel from "./SlickCarousel";
+
+const App = () => {
+  return (
+    <main>
+      <Carousel />
+      {/* <SlickCarousel /> */}
+    </main>
+  );
+};
+export default App;
+```
+
+---
+
+- In src Carousel.jsx
+
+```js
+
+```
 
 <br>
 
