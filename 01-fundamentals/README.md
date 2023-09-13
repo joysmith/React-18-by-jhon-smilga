@@ -1,82 +1,25 @@
-#### 14. [Intro](#14)
-
-#### 15. [Github Repository](#15)
-
-#### 16. [Folder Structure](#16)
-
-#### 17. [Remove Boilerplate](#17)
-
-#### 18. [First Component](#18)
-
-#### 19. [Extensions and Settings](#19)
-
-#### 20. [Create Element Function](#20)
-
-#### 21. [JSX Rules](#21)
-
-#### 22. [Nest Components](#22)
-
-#### 23. [React Developer Tools](#23)
-
-#### 24. [BookList](#24)
-
-#### 25. [CSS](#25)
-
-#### 26. [Local Images (public folder)](#26)
-
-#### 27. [JSX - CSS](#27)
-
-#### 28. [JSX - Javascript](#28)
-
-#### 29. [Props - Basic Setup](#29)
-
-#### 30. [Props - Somewhat Dynamic Setup](#30)
-
-#### 31. [Props - Multiple Approaches](#31)
-
-#### 32. [Children Prop](#32)
-
-#### 33. [Simple List](#33)
-
-#### 34. [Proper List](#34)
-
-#### 35. [Key Prop](#35)
-
-#### 36. [Object as a Prop](#36)
-
-#### 37. [Event Basics](#37)
-
-#### 38. [Form Submission](#38)
-
-#### 39. [Form Submission - Button Example](#39)
-
-#### 40. [Anonymous Function (arrow)](#40)
-
-#### 41. [Components Feature](#41)
-
-#### 42. [Prop Drilling](#42)
-
-#### 43. [Complex Example - Intro](#43)
-
-#### 44. [Complex Example - Bug](#44)
-
-#### 45. [Complex Example - Fix](#45)
-
-#### 46. [ES6 Modules](#46)
-
-#### 47. [Local Images (src folder)](#47)
-
-#### 48. [Numbers Challenge](#48)
-
-#### 49. [Title Challenge](#49)
-
-#### 50. [Build Folder](#50)
-
-#### 51. [Deployment](#51)
-
-#### 73. [VITE - Intro](#73)
-
-#### 74. [VITE - Install / Setup](#74)
+| Index                                     | index                                       |
+| ----------------------------------------- | ------------------------------------------- |
+| 14. [Intro](#14)                          | 35. [Key Prop](#35)                         |
+| 15. [Github Repository](#15)              | 36. [Object as a Prop](#36)                 |
+| 16. [Folder Structure](#16)               | 37. [Event Basics](#37)                     |
+| 17. [Remove Boilerplate](#17)             | 38. [Form Submission](#38)                  |
+| 18. [First Component](#18)                | 39. [Form Submission - Button Example](#39) |
+| 19. [Extensions and Settings](#19)        | 40. [Anonymous Function (arrow)](#40)       |
+| 20. [Create Element Function](#20)        | 41. [Components Feature](#41)               |
+| 21. [JSX Rules](#21)                      | 42. [Prop Drilling](#42)                    |
+| 22. [Nest Components](#22)                | 43. [Complex Example - Intro](#43)          |
+| 23. [React Developer Tools](#23)          | 44. [Complex Example - Bug](#44)            |
+| 24. [BookList](#24)                       | 45. [Complex Example - Fix](#45)            |
+| 25. [CSS](#25)                            | 46. [ES6 Modules](#46)                      |
+| 26. [Local Images (public folder)](#26)   | 47. [Local Images (src folder)](#47)        |
+| 27. [JSX - CSS](#27)                      | 48. [Numbers Challenge](#48)                |
+| 28. [JSX - Javascript](#28)               | 49. [Title Challenge](#49)                  |
+| 29. [Props - Basic Setup](#29)            | 50. [Build Folder](#50)                     |
+| 30. [Props - Somewhat Dynamic Setup](#30) | 51. [Deployment](#51)                       |
+| 31. [Props - Multiple Approaches](#31)    | 73. [VITE - Intro](#73)                     |
+| 32. [Children Prop](#32)                  | 74. [VITE - Install / Setup](#74)           |
+| 33. [Simple List](#33)                    |
 
 <br>
 
