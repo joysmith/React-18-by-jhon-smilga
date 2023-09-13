@@ -27,6 +27,17 @@
 
 ### 14. Intro<a id="14"> </a>
 
+> **_Business Objective: Layout_**
+
+## <img src="notes/app.png" width="400">
+
+| Technology    | Description      |
+| ------------- | ---------------- |
+| `Framework`   | -                |
+| `Library`     | react hook used: |
+| `Package`     | -                |
+| `Text editor` | Vs code          |
+
 <br>
 
 ### 15. Github Repository<a id="15"> </a>
