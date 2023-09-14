@@ -2286,30 +2286,64 @@ function Example() {
 
 ### 117. Project Structure - Folder Example<a id='117'></a>
 
-/tutorial/04-project-structure/starter
+- In ./tutorial/04-project-structure/starter
 
-There are more options
+There are more options to setup project
 
-Normally somewhere in the src
+Normally somewhere in the src, we mostly do like this
 
 /components/componentName.jsx
 /screens/componentName.jsx
 
-- create navbar folder
+---
 
-  - setup Navbar.jsx (component)
-  - Navbar.css (styles)
+> 1 way to setup project when having few components/files
 
-- import in App.jsx
+- create navbar folder inside it create following files
 
-import Final from 'pathToFolder/Navbar/Navbar'
+  - create Navbar.jsx (component) -rfca
+  - create Navbar.css (styles)
 
-- first solution rename to index.jsx(entry point)
+```js
+import "./Navbar.css";
+const Navbar = () => {
+  return (
+    <div className="navbar">
+      <h2>navbar component</h2>
+    </div>
+  );
+};
+export default Navbar;
+```
 
-Works but eventually too many index tabs :):):)
+```css
+.navbar {
+  background: blue;
+  color: white;
+}
+```
 
-- rename back to Navbar.jsx
-- create index.jsx
+---
+
+- In src/App.jsx, import Navbar
+
+```js
+import Navbar from "./tutorial/04-project-structure/starter/Navbar";
+
+function App() {
+  return (
+    <div className="container">
+      <h2>Advanced React</h2>
+    </div>
+  );
+}
+
+export default App;
+```
+
+---
+
+- create index.jsx(entry point) to avoid "import Final from 'pathToFolder/**Navbar/Navbar**" this problem
 
 ```js
 export { default } from "./Navbar";
@@ -2319,53 +2353,925 @@ export { default } from "./Navbar";
 
 ### 118. Project Structure - Named Exports<a id='118'></a>
 
+> 2 Way of setting up project, when having alot of components/files
+
+- In /tutorial/04-project-structure/starter
+
+- only makes sense if you have quite a few files
+
+- In starter folder create Pages subfolder
+
+- Create and setup two components Home.jsx and About.jsx -rfca
+
+```js
+const Home = () => {
+  return <div>Home Page</div>;
+};
+export default Home;
+```
+
+```js
+const About = () => {
+  return <div>About Page</div>;
+};
+export default About;
+```
+
+- create index.jsx, import both and export them
+
+```js
+import Home from "./Home";
+import About from "./About";
+
+export { Home, About };
+```
+
+---
+
+- In the src/App.jxs, import component
+
+```js
+// import {Home, About} from 'pathToFolder/Pages
+import { Home, About } from " /tutorial/04-project-structure/starter/Pages";
+
+function App() {
+  return (
+    <div className="container">
+      <Home />
+      <About />
+    </div>
+  );
+}
+
+export default App;
+```
+
 <br>
 
 ### 119. Project Structure - Export Group<a id='119'></a>
+
+> 3 Way of setting up project, when having specific use case
+
+- In ./tutorial/04-project-structure/starter
+
+- create Example folder
+- setup two components FirstComponent.jsx, SecondComponent.jsx (setup simple returns) and index.jsx file
+- FirstComponent.jsx
+
+```js
+const FirstComponent = () => {
+  return <div>FirstComponent</div>;
+};
+export default FirstComponent;
+```
+
+- SecondComponent.jsx
+
+```js
+const SecondComponent = () => {
+  return <div>SecondComponent</div>;
+};
+export default SecondComponent;
+```
+
+- index.jsx, setup return and render both components (import)
+
+```js
+import FirstComponent from "./FirstComponent";
+import SecondComponent from "./SecondComponent";
+
+const Example = () => {
+  return (
+    <div>
+      <FirstComponent />
+      <SecondComponent />
+    </div>
+  );
+};
+export default Example;
+```
+
+---
+
+- In src/App.jsx, import/render index.jsx
+
+```js
+import Example from "./tutorial/04-project-structure/Example";
+function App() {
+  return (
+    <div className="container">
+      <Example />
+    </div>
+  );
+}
+
+export default App;
+```
+
+##### Project Structure - Extra Extensions
+
+- code spell checker - works well with code and documents.
+- glean - easy extract JSX into a new component
 
 <br>
 
 ### 120. Leverage Javascript - Intro<a id='120'></a>
 
+[Javascript Nuggets -Optional Chaining](https://www.youtube.com/watch?v=PuEGrylM1x8&list=PLnHJACx3NwAfRUcuKaYhZ6T5NRIpzgNGJ&index=12&t=254s)
+
+- In ./tutorial/05-leverage-javascript/starter
+
+Setup Challenge
+
+- take a look at the people in array in data.js
+- create List.jsx component
+- in List.jsx import and iterate over people (data)
+- for now just render name
+- once you have list setup separate Person.jsx component
+  - try glean extension
+- in Person render
+  - name, nickName, image
+
+Yes, there will be a bug.
+
 <br>
 
 ### 121. Leverage Javascript - Challenge<a id='121'></a>
+
+1. In starter folder create List.jsx
+
+```js
+// coming from section03 src/data
+import { people } from "../../../data";
+
+const List = () => {
+  return (
+    <div>
+      {people.map((person) => {
+        return <div>{person.name}</div>;
+      })}
+    </div>
+  );
+};
+export default List;
+```
+
+- modify with key
+
+```js
+// coming from section03 src/data
+import { people } from "../../../data";
+
+const List = () => {
+  return (
+    <div>
+      {people.map((person) => {
+        return <div key={person.id}>{person.name}</div>;
+      })}
+    </div>
+  );
+};
+export default List;
+```
+
+---
+
+- In src/App.jsx, import/render List component
+
+```js
+import Example from "./tutorial/05-leverage-javascript/starter/List";
+function App() {
+  return (
+    <div className="container">
+      <List />
+    </div>
+  );
+}
+
+export default App;
+```
+
+---
+
+- after using glean extension extract Person.jsx component from List.jsx
+
+```js
+import { people } from "../../../data";
+import Person from "./Person";
+
+const List = () => {
+  return (
+    <div>
+      {people.map((person) => {
+        return <Person key={person.name} {...person} />;
+      })}
+    </div>
+  );
+};
+export default List;
+```
+
+- Person.jsx, the template,
+- NOTE THIS CODE WILL CREATE ERROR, because image does not exist in the first instance
+
+```js
+import React from "react";
+
+export function Person({ name, nickName = "shakeAndBake", images }) {
+
+// img is not in the first instance in array
+  const img = images.[0].small.url;
+
+  return (
+    <div>
+      <img src={img} alt={name} style={{ width: "50px" }} />
+      <h4>{name} </h4>
+      <p>Nickname : {nickName}</p>
+    </div>
+  );
+}
+```
 
 <br>
 
 ### 122. Leverage Javascript - Complete<a id='122'></a>
 
+##### Default Values - Vanilla JS (Optional)
+
+In JavaScript, when defining a function, you can specify default values for its parameters. This means that if a caller of the function does not provide a value for a particular parameter, the default value will be used instead. Default parameters are defined by assigning a value to the parameter in the function definition.
+
+For example, consider the following function, which takes two parameters, x and y, and returns their sum:
+
+```js
+function add(x, y) {
+  return x + y;
+}
+```
+
+If we call this function with only one argument, it will return NaN because y is undefined.
+
+We can set default values for x,y as:
+
+```js
+function add(x = 0, y = 0) {
+  return x + y;
+}
+```
+
+Now, if we call add(3), the function will return 3, because the default value of 0 is used for the y parameter.
+
+---
+
+##### Optional Chaining - Vanilla JS (Optional)
+
+n JavaScript, the optional chaining operator (?.) is a new feature that allows you to access properties of an object without worrying about whether the object or the property is null or undefined. It's a shorthand for a common pattern of checking for null or undefined before accessing an object's property.
+
+For example, consider the following code, which accesses the firstName property of an object:
+
+```js
+const person = { name: { first: "John", last: "Doe" } };
+console.log(person.name.first);
+```
+
+If the name property is null or undefined, this code will throw an error. To prevent this, we can use the optional chaining operator:
+
+```js
+console.log(person?.name?.first);
+```
+
+Now, if the person.name is null or undefined, this code will simply return undefined instead of throwing an error. This make the code more robust and readable.
+
+---
+
+- Person.jsx, the template
+- NOTE: the images coming from data structure is nested
+
+```js
+import React from "react";
+// coming from asset 03section
+import avatar from "../../../assets/default-avatar.svg";
+
+export function Person({ name, nickName = "shakeAndBake", images }) {
+  // before optional chaining
+
+  // if images exist get me the first one, if first one exist get me the small property, if small property exist get me the url
+  // const img =
+  //   (images && images[0] && images[0].small && images[0].small.url) || avatar;
+
+  // ref. doing same functionality
+  // Combining with the nullish coalescing operator ??
+  // const img = images?.[0]?.small?.url ?? avatar;
+  // ?? vs || - please utilize the search engine
+
+  // if images exist get me the first one, if that exist get me small, if that exist get me the url
+  // or we can say: check for images, check for firs one, check for small, check for url
+  // if images not exist then show the default avatar
+  const img = images?.[0]?.small?.url || avatar;
+
+  return (
+    <div>
+      <img src={img} alt={name} style={{ width: "50px" }} />
+      <h4>{name} </h4>
+      <p>Nickname : {nickName}</p>
+    </div>
+  );
+}
+```
+
 <br>
 
 ### 123. Forms - Setup<a id='123'></a>
+
+- In src/App.jsx, import/render Starter component
+
+```js
+import Starter from "./tutorial/06-forms/starter/01-controlled-inputs.jsx";
+
+function App() {
+  return (
+    <div className="container">
+      <Starter />
+    </div>
+  );
+}
+
+export default App;
+```
+
+---
+
+Setup (for all form videos)
+
+- In /tutorial/06-forms/starter/01-controlled-inputs.jsx
+
+```js
+const ControlledInputs = () => {
+  return (
+    <form className="form">
+      <h4>controlled inputs</h4>
+      <div className="form-row">
+        {/* htmlFor & id property should match */}
+        <label htmlFor="name" className="form-label">
+          name
+        </label>
+        <input type="text" className="form-input" id="name" />
+      </div>
+
+      <div className="form-row">
+        <label htmlFor="email" className="form-label">
+          Email
+        </label>
+        <input type="email" className="form-input" id="email" />
+      </div>
+
+      <button type="submit" className="btn btn-block">
+        submit
+      </button>
+    </form>
+  );
+};
+export default ControlledInputs;
+```
 
 <br>
 
 ### 124. Controlled Inputs<a id='124'></a>
 
+- In src/App.jsx, import/render Starter component
+
+```js
+import Starter from "./tutorial/06-forms/starter/01-controlled-inputs.jsx";
+
+function App() {
+  return (
+    <div className="container">
+      <Starter />
+    </div>
+  );
+}
+
+export default App;
+```
+
+---
+
+- setup state values for name & email
+- add value, onChange to each input
+- setup onSubmit
+
+```js
+import { useState } from "react";
+const ControlledInputs = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+
+  // const handleChange = (e) => {
+  //   // for now we won't use it
+  //   const name = e.target.name;
+  //   const value = e.target.value;
+  // };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // do something
+    console.log(name, email);
+  };
+
+  return (
+    <form className="form" onSubmit={handleSubmit}>
+      <h4>controlled inputs</h4>
+
+      <div className="form-row">
+        <label htmlFor="name" className="form-label">
+          name
+        </label>
+        <input
+          type="text"
+          className="form-input"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          id="name"
+        />
+      </div>
+
+      <div className="form-row">
+        <label htmlFor="email" className="form-label">
+          Email
+        </label>
+        <input
+          type="email"
+          className="form-input"
+          id="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+      </div>
+
+      <button type="submit" className="btn btn-block">
+        submit
+      </button>
+    </form>
+  );
+};
+export default ControlledInputs;
+```
+
+- Note: we didn't submit or post the data via form using below button, but we used form onSubmit
+
 <br>
 
 ### 125. User Challenge - Setup<a id='125'></a>
+
+> **_Business Objective: Layout_**
+
+<img src="notes/form.png" width="400">
+
+- setup controlled input (name input)
+- setup onSubmit (for now just placeholder)
+- import data array (first array) from data
+- create another state value (data as default)
+- iterate over and display right after form (h4)
+- when user submits the form add new person to the list
+
+- Extra Challenge
+  - add button and setup functionality to remove user
 
 <br>
 
 ### 126. User Challenge - Add New User<a id='126'></a>
 
+- In src/App.jsx, import/render Starter component
+
+```js
+import Starter from "./tutorial/06-forms/starter/02-user-challenge.jsx";
+
+function App() {
+  return (
+    <div className="container">
+      <Starter />
+    </div>
+  );
+}
+
+export default App;
+```
+
+---
+
+- In ./tutorial/06-forms/starter/02-user-challenge.jsx
+
+```js
+import { useState } from "react";
+import { data } from "../../../data";
+
+const UserChallenge = () => {
+  const [name, setName] = useState("");
+  const [users, setUsers] = useState(data);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // do something
+    console.log(name);
+
+    /*--- Functionality to add new user ---*/
+    // if no value, do nothing
+    if (!name) return;
+
+    // if value, setup new user and add to current users
+    const fakeId = Date.now();
+    console.log(fakeId);
+
+    // const newUser = { id: fakeId, name: name };
+    const newUser = { id: fakeId, name };
+    // copy all the user from state variable with new user
+    const updatedUsers = [...users, newUser];
+    // update state
+    setUsers(updatedUsers);
+
+    // clean out the input
+    setName("");
+  };
+
+  return (
+    <div>
+      <form className="form" onSubmit={handleSubmit}>
+        <h4>Add User</h4>
+
+        <div className="form-row">
+          <label htmlFor="name" className="form-label">
+            name
+          </label>
+          <input
+            type="text"
+            className="form-input"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            id="name"
+          />
+        </div>
+
+        <button type="submit" className="btn btn-block">
+          submit
+        </button>
+      </form>
+
+      {/* render users */}
+      <h2>users</h2>
+      {users.map((user) => {
+        return (
+          <div key={user.id}>
+            <h4>{user.name}</h4>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+export default UserChallenge;
+```
+
 <br>
 
 ### 127. User Challenge - Remove User<a id='127'></a>
+
+- In ./tutorial/06-forms/starter/02-user-challenge.jsx
+
+```js
+import { useState } from "react";
+import { data } from "../../../data";
+
+const UserChallenge = () => {
+  const [name, setName] = useState("");
+  const [users, setUsers] = useState(data);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // do something
+    console.log(name);
+
+    /*--- Functionality to add new user ---*/
+    // if no value, do nothing
+    if (!name) return;
+
+    // if value, setup new user and add to current users
+    const fakeId = Date.now();
+    console.log(fakeId);
+
+    // const newUser = { id: fakeId, name: name };
+    const newUser = { id: fakeId, name };
+    // copy all the user from state variable with new user
+    const updatedUsers = [...users, newUser];
+    // update state
+    setUsers(updatedUsers);
+
+    // clean out the input
+    setName("");
+  };
+
+  const removeUser = (id) => {
+    const updatedUsers = users.filter((person) => person.id !== id);
+    // update state
+    setUsers(updatedUsers);
+  };
+
+  return (
+    <div>
+      <form className="form" onSubmit={handleSubmit}>
+        <h4>Add User</h4>
+
+        <div className="form-row">
+          <label htmlFor="name" className="form-label">
+            name
+          </label>
+          <input
+            type="text"
+            className="form-input"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            id="name"
+          />
+        </div>
+
+        <button type="submit" className="btn btn-block">
+          submit
+        </button>
+      </form>
+
+      {/* render users */}
+      <h2>users</h2>
+
+      {users.map((user) => {
+        return (
+          <div key={user.id}>
+            <h4>{user.name}</h4>
+
+            <button onClick={() => removeUser(user.id)} className="btn">
+              remove
+            </button>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+export default UserChallenge;
+```
 
 <br>
 
 ### 128. Multiple Inputs<a id='128'></a>
 
+> **_Business Objective: Layout_**
+
+<img src="notes/multipleinputs.png" width="400">
+
+---
+
+[Javascript Nuggets - Dynamic Object Keys](https://www.youtube.com/watch?v=_qxCYtWm0tw&list=PLnHJACx3NwAfRUcuKaYhZ6T5NRIpzgNGJ&index=3&t=97s)
+
+- Instead of having three state value have one
+
+- In src/App.jsx, import/render Starter component
+
+```js
+import Starter from "./tutorial/06-forms/starter/03-multiple-inputs.jsx";
+
+function App() {
+  return (
+    <div className="container">
+      <Starter />
+    </div>
+  );
+}
+
+export default App;
+```
+
+---
+
+- In ./tutorial/06-forms/starter/03-multiple-inputs.jsx
+
+- inputs must have name attribute, when we use single handleChange function setup
+
+```js
+import { useState } from "react";
+
+const MultipleInputs = () => {
+  const [user, setUser] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(user);
+  };
+  return (
+    <div>
+      <form className="form" onSubmit={handleSubmit}>
+        <h4>Multiple Inputs</h4>
+        {/* name */}
+        <div className="form-row">
+          <label htmlFor="name" className="form-label">
+            name
+          </label>
+          <input
+            type="text"
+            className="form-input"
+            id="name"
+            name="name"
+            value={user.name}
+            onChange={handleChange}
+          />
+        </div>
+
+        {/* email */}
+        <div className="form-row">
+          <label htmlFor="email" className="form-label">
+            Email
+          </label>
+          <input
+            type="email"
+            className="form-input"
+            id="email"
+            name="email"
+            value={user.email}
+            onChange={handleChange}
+          />
+        </div>
+
+        {/* password */}
+        <div className="form-row">
+          <label htmlFor="password" className="form-label">
+            Password
+          </label>
+          <input
+            type="password"
+            className="form-input"
+            id="password"
+            name="password"
+            value={user.password}
+            onChange={handleChange}
+          />
+        </div>
+
+        <button type="submit" className="btn btn-block">
+          submit
+        </button>
+      </form>
+    </div>
+  );
+};
+
+export default MultipleInputs;
+```
+
 <br>
 
 ### 129. Checkbox Input<a id='129'></a>
 
+> **_Business Objective: Layout_**
+
+<img src="notes/selectinput.png" width="400">
+
+---
+
+- In src/App.jsx, import/render Starter component
+
+```js
+import Starter from "./tutorial/06-forms/starter/04-other-inputs.jsx";
+
+function App() {
+  return (
+    <div className="container">
+      <Starter />
+    </div>
+  );
+}
+
+export default App;
+```
+
+---
+
+- In tutorial/06-forms/starter/04-other-inputs.jsx
+
+```js
+import { useState } from "react";
+
+const OtherInputs = () => {
+  const [shipping, setShipping] = useState(false);
+
+  const handleShipping = (e) => {
+    console.log(e.target.checked);
+    setShipping(e.target.checked);
+  };
+
+  return (
+    <div>
+      <form className="form">
+        <h4>Other Inputs</h4>
+        {/* name */}
+        <div className="form-row" style={{ textAlign: "left" }}>
+          <input
+            type="checkbox"
+            checked={shipping}
+            id="shipping"
+            name="shipping"
+            onChange={handleShipping}
+          />
+          <label htmlFor="shipping"> Free Shipping </label>
+        </div>
+
+        <div className="form-row" style={{ textAlign: "left" }}>
+          <label htmlFor="framework" className="form-label">
+            Framework
+          </label>
+        </div>
+
+        <button type="submit" className="btn btn-block">
+          submit
+        </button>
+      </form>
+    </div>
+  );
+};
+
+export default OtherInputs;
+```
+
 <br>
 
 ### 130. Select Input<a id='130'></a>
+
+- Continue...
+- In tutorial/06-forms/starter/04-other-inputs.jsx
+
+```js
+import { useState } from "react";
+
+const frameworks = ["react", "angular", "vue", "svelte"];
+
+const OtherInputs = () => {
+  const [shipping, setShipping] = useState(false);
+  const [framework, setFramework] = useState("react");
+
+  const handleShipping = (e) => {
+    console.log(e.target.checked);
+    setShipping(e.target.checked);
+  };
+
+  const handleFramework = (e) => {
+    setFramework(e.target.value);
+  };
+
+  return (
+    <div>
+      <form className="form">
+        <h4>Other Inputs</h4>
+        {/* name */}
+        <div className="form-row" style={{ textAlign: "left" }}>
+          <input
+            type="checkbox"
+            checked={shipping}
+            id="shipping"
+            name="shipping"
+            onChange={handleShipping}
+          />
+          <label htmlFor="shipping"> Free Shipping </label>
+        </div>
+
+        <div className="form-row" style={{ textAlign: "left" }}>
+          <label htmlFor="framework" className="form-label">
+            Framework
+          </label>
+          <select
+            name="framework"
+            id="framework"
+            value={framework}
+            onChange={handleFramework}
+          >
+            {frameworks.map((framework) => {
+              return <option key={framework}>{framework}</option>;
+            })}
+          </select>
+        </div>
+
+        <button type="submit" className="btn btn-block">
+          submit
+        </button>
+      </form>
+    </div>
+  );
+};
+
+export default OtherInputs;
+```
 
 <br>
 
