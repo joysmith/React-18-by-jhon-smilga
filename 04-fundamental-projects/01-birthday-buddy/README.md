@@ -20,6 +20,14 @@
 
 ### 166. Intro<a id='166'></a>
 
+> **_Business Objective: Layout_**
+
+<img src="notes/app.png" width="500">
+
+- [Live App](https://react-vite-projects-1-birthday-buddy.netlify.app/)
+
+---
+
 > Que: How should I work on project <br>
 > Ans: There are Three ways
 

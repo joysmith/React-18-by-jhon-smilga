@@ -22,6 +22,14 @@
 
 ### 181. Reviews - Setup<a id='181'></a>
 
+> **_Business Objective: Layout_**
+
+<img src="notes/app.png" width="500">
+
+- [Live App](https://react-vite-projects-3-reviews.netlify.app/)
+
+---
+
 ##### Figma URL
 
 [Reviews](https://www.figma.com/file/e8L2QiR4GVTa5cGuRpXtk3/Reviews?node-id=0%3A1&t=gcCYcePiKxnkJ9kH-1)

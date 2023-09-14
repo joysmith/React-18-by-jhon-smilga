@@ -18,6 +18,14 @@
 
 ### 195. Menu - Setup<a id="195"></a>
 
+> **_Business Objective: Layout_**
+
+<img src="notes/app.png" width="500">
+
+- [Live App](https://react-vite-projects-5-menu.netlify.app/)
+
+---
+
 ##### Figma URL
 
 [Menu](https://www.figma.com/file/PwlnSJXCuo4qD2o6EJiuj9/Menu?node-id=0%3A1&t=oaKVwYVqc9Oon2Ts-1)

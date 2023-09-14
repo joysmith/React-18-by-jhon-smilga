@@ -18,6 +18,12 @@
 
 ### 174. Tours - Setup<a id='174'></a>
 
+> **_Business Objective: Layout_**
+
+<img src="notes/app.png" width="500">
+
+- [Live App](https://react-vite-projects-2-tours.netlify.app/)
+
 #### Figma URL
 
 [Tours](https://www.figma.com/file/OnLoM3AzBFaHzSc2iolJS0/Tours?node-id=0%3A1&t=wiRXOlTLN5ehekYI-1)

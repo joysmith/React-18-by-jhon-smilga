@@ -22,6 +22,14 @@
 
 ### 209. Slider - Setup<a id="209"></a>
 
+> **_Business Objective: Layout_**
+
+<img src="notes/app.png" width="500">
+
+- [Live App](https://react-vite-project-7-slider.netlify.app/)
+
+---
+
 #### Figma URL
 
 [Slider](https://www.figma.com/file/QfMzzThSYmgabSvn4t8Yfe/Slider?node-id=0%3A1&t=IpsYjMUn3Xj3Hs3N-1)
