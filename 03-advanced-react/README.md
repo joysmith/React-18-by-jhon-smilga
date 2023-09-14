@@ -1,184 +1,38 @@
-#### 75. [Intro](#75)
-
-#### 76. [Github Repository](#76)
-
-#### 77. [Setup](#77)
-
-#### 78. [Overview](#78)
-
-#### 79. [Error Example](#79)
-
-#### 80. [UseState Fundamentals](#80)
-
-#### 81. [Initial Render and Re-renders](#81)
-
-#### 82. [General Rules of React Hooks](#82)
-
-#### 83. [UseState Array Example - Setup](#83)
-
-#### 84. [UseState Array Example - Complete](#84)
-
-#### 85. [UseState - Extra Info](#85)
-
-#### 86. [UseState Object Example - Setup](#86)
-
-#### 87. [Auto Batching Info](#87)
-
-#### 88. [UseState Object Example - Complete](#88)
-
-#### 89. [UseState Set Function "Gotcha"](#89)
-
-#### 90. [UseState Functional Update Form](#90)
-
-#### 91. [UseState - SetTimeout Example](#91)
-
-#### 92. [Matching Project](#92)
-
-#### 93. [Code Example](#93)
-
-#### 94. [UseEffect - Fundamentals](#94)
-
-#### 95. [UseEffect - Multiple Effects](#95)
-
-#### 96. [UseEffect Fetch Challenge - Intro](#96)
-
-#### 97. [UseEffect Fetch Challenge - Complete](#97)
-
-#### 98. [UseEffect Clean Up Info](#98)
-
-#### 99. [Multiple Returns](#99)
-
-#### 100. [Multiple Returns - Fetch Data Setup](#100)
-
-#### 101. [Multiple Returns - Fetch Data](#101)
-
-#### 102. [Fetch Error "Gotcha"](#102)
-
-#### 103. [Order Matters](#103)
-
-#### 104. [Fetch Function Location](#104)
-
-#### 105. [React Hooks Rules](#105)
-
-#### 106. [Vanilla.js (Optional)](#106)
-
-#### 107. [Short Circuit - Overview](#107)
-
-#### 108. [Short Circuit - Examples](#108)
-
-#### 109. [Ternary Operator](#109)
-
-#### 110. [Toggle Challenge](#110)
-
-#### 111. [User Challenge](#111)
-
-#### 112. [UseEffect Cleanup Function - Setup/Challenge](#112)
-
-#### 113. [UseEffect - Timer Example](#113)
-
-#### 114. [UseEffect - Event Listeners Example](#114)
-
-#### 115. [You Might Not Need an Effect](#115)
-
-#### 116. [Matching Projects](#116)
-
-#### 117. [Project Structure - Folder Example](#117)
-
-#### 118. [Project Structure - Named Exports](#118)
-
-#### 119. [Project Structure - Export Group](#119)
-
-#### 120. [Leverage Javascript - Intro](#120)
-
-#### 121. [Leverage Javascript - Challenge](#121)
-
-#### 122. [Leverage Javascript - Complete](#122)
-
-#### 123. [Forms - Setup](#123)
-
-#### 124. [Controlled Inputs](#124)
-
-#### 125. [User Challenge - Setup](#125)
-
-#### 126. [User Challenge - Add New User](#126)
-
-#### 127. [User Challenge - Remove User](#127)
-
-#### 128. [Multiple Inputs](#128)
-
-#### 129. [Checkbox Input](#129)
-
-#### 130. [Select Input](#130)
-
-#### 131. [FormData API](#131)
-
-#### 132. [Matching Projects](#132)
-
-#### 133. [useRef - DOM Node](#133)
-
-#### 134. [useRef - Initial Render](#134)
-
-#### 135. [Matching Projects](#135)
-
-#### 136. [Custom Hooks - Toggle](#136)
-
-#### 137. [Custom Hooks - Fetch Person](#137)
-
-#### 138. [Custom Hooks - Generic Fetch](#138)
-
-#### 139. [Context API - Challenge](#139)
-
-#### 140. [Context API - Prop Drilling](#140)
-
-#### 141. [Context API - Solution](#141)
-
-#### 142. [Context API - Custom Hook](#142)
-
-#### 143. [Context API - Global Setup](#143)
-
-#### 144. [Matching Projects](#144)
-
-#### 145. [UseReducer - Intro](#145)
-
-#### 146. [UseReducer - Challenge](#146)
-
-#### 147. [UseReducer - Setup](#147)
-
-#### 148. [Reducer Basics](#148)
-
-#### 149. [Actions and Default State](#149)
-
-#### 150. [Reset List](#150)
-
-#### 151. [Remove Person](#151)
-
-#### 152. [Import/Export](#152)
-
-#### 153. [Matching Projects](#153)
-
-#### 154. [Performance - Intro](#154)
-
-#### 155. [Component Re-renders](#155)
-
-#### 156. [React Dev Tools](#156)
-
-#### 157. [Lower State](#157)
-
-#### 158. [Lower State - Challenge](#158)
-
-#### 159. [React.memo()](#159)
-
-#### 160. [Mind Grenade](#160)
-
-#### 161. [UseCallback Hook](#161)
-
-#### 162. [UseCallback Hook - Common Use Case](#162)
-
-#### 163. [UseMemo Hook](#163)
-
-#### 164. [UseTransition Hook](#164)
-
-#### 165. [React Suspense](#165)
+| Index                                            |                           index                           |                                           index |
+| :----------------------------------------------- | :-------------------------------------------------------: | ----------------------------------------------: |
+| 75. [Intro](#75)                                 |            106. [Vanilla.js (Optional)](#106)             |        137. [Custom Hooks - Fetch Person](#137) |
+| 76. [Github Repository](#76)                     |           107. [Short Circuit - Overview](#107)           |       138. [Custom Hooks - Generic Fetch](#138) |
+| 77. [Setup](#77)                                 |           108. [Short Circuit - Examples](#108)           |            139. [Context API - Challenge](#139) |
+| 78. [Overview](#78)                              |               109. [Ternary Operator](#109)               |        140. [Context API - Prop Drilling](#140) |
+| 79. [Error Example](#79)                         |               110. [Toggle Challenge](#110)               |             141. [Context API - Solution](#141) |
+| 80. [UseState Fundamentals](#80)                 |                111. [User Challenge](#111)                |          142. [Context API - Custom Hook](#142) |
+| 81. [Initial Render and Re-renders](#81)         | 112. [UseEffect Cleanup Function - Setup/Challenge](#112) |         143. [Context API - Global Setup](#143) |
+| 82. [General Rules of React Hooks](#82)          |          113. [UseEffect - Timer Example](#113)           |                  144. [Matching Projects](#144) |
+| 83. [UseState Array Example - Setup](#83)        |     114. [UseEffect - Event Listeners Example](#114)      |                 145. [UseReducer - Intro](#145) |
+| 84. [UseState Array Example - Complete](#84)     |         115. [You Might Not Need an Effect](#115)         |             146. [UseReducer - Challenge](#146) |
+| 85. [UseState - Extra Info](#85)                 |              116. [Matching Projects](#116)               |                 147. [UseReducer - Setup](#147) |
+| 86. [UseState Object Example - Setup](#86)       |      117. [Project Structure - Folder Example](#117)      |                     148. [Reducer Basics](#148) |
+| 87. [Auto Batching Info](#87)                    |      118. [Project Structure - Named Exports](#118)       |          149. [Actions and Default State](#149) |
+| 88. [UseState Object Example - Complete](#88)    |       119. [Project Structure - Export Group](#119)       |                         150. [Reset List](#150) |
+| 89. [UseState Set Function "Gotcha"](#89)        |         120. [Leverage Javascript - Intro](#120)          |                      151. [Remove Person](#151) |
+| 90. [UseState Functional Update Form](#90)       |       121. [Leverage Javascript - Challenge](#121)        |                      152. [Import/Export](#152) |
+| 91. [UseState - SetTimeout Example](#91)         |        122. [Leverage Javascript - Complete](#122)        |                  153. [Matching Projects](#153) |
+| 92. [Matching Project](#92)                      |                123. [Forms - Setup](#123)                 |                154. [Performance - Intro](#154) |
+| 93. [Code Example](#93)                          |              124. [Controlled Inputs](#124)               |               155. [Component Re-renders](#155) |
+| 94. [UseEffect - Fundamentals](#94)              |            125. [User Challenge - Setup](#125)            |                    156. [React Dev Tools](#156) |
+| 95. [UseEffect - Multiple Effects](#95)          |        126. [User Challenge - Add New User](#126)         |                        157. [Lower State](#157) |
+| 96. [UseEffect Fetch Challenge - Intro](#96)     |         127. [User Challenge - Remove User](#127)         |            158. [Lower State - Challenge](#158) |
+| 97. [UseEffect Fetch Challenge - Complete](#97)  |               128. [Multiple Inputs](#128)                |                       159. [React.memo()](#159) |
+| 98. [UseEffect Clean Up Info](#98)               |                129. [Checkbox Input](#129)                |                       160. [Mind Grenade](#160) |
+| 99. [Multiple Returns](#99)                      |                 130. [Select Input](#130)                 |                   161. [UseCallback Hook](#161) |
+| 100. [Multiple Returns - Fetch Data Setup](#100) |                 131. [FormData API](#131)                 | 162. [UseCallback Hook - Common Use Case](#162) |
+| 101. [Multiple Returns - Fetch Data](#101)       |              132. [Matching Projects](#132)               |                       163. [UseMemo Hook](#163) |
+| 102. [Fetch Error "Gotcha"](#102)                |              133. [useRef - DOM Node](#133)               |                 164. [UseTransition Hook](#164) |
+| 103. [Order Matters](#103)                       |           134. [useRef - Initial Render](#134)            |                     165. [React Suspense](#165) |
+| 104. [Fetch Function Location](#104)             |              135. [Matching Projects](#135)               |
+| 105. [React Hooks Rules](#105)                   |            136. [Custom Hooks - Toggle](#136)             |
+
+---
 
 <br>
 
