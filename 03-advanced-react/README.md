@@ -3131,6 +3131,10 @@ export default OtherInputs;
 
 ### 131. FormData API<a id='131'></a>
 
+> **_Business Objective: Layout_**
+
+<img src="notes/formdataapi.png" width="500">
+
 [JS Nuggets - FormData API](https://youtu.be/5-x4OUM-SP8)
 
 - a great solution when you have bunch of inputs
@@ -3169,10 +3173,13 @@ const UncontrolledInputs = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // data is in array of array structure
     const formData = new FormData(e.currentTarget);
     // const name = formData.get('name');
     // console.log(name);
     // console.log([...formData.entries()]);
+
+    // Object.fromEntries turn array data structure into object with key value pairs
     const newUser = Object.fromEntries(formData);
     // do something (post request, add to list, etc)
     console.log(newUser);
@@ -3225,6 +3232,8 @@ const UncontrolledInputs = () => {
 export default UncontrolledInputs;
 ```
 
+---
+
 - e.currentTarget
 
 In React, e.currentTarget returns the DOM element that triggered the event.
@@ -3253,33 +3262,570 @@ The reset() method is a built-in method in HTML that can be used to reset all fo
 
 ### 132. Matching Projects<a id='132'></a>
 
+- ref course read me
+
 <br>
 
 ### 133. useRef - DOM Node<a id='133'></a>
+
+> **_Business Objective: Layout_**
+
+<img src="notes/useref1.png" width="500">
+
+---
+
+- In src/App.jsx, import/render Starter component
+
+```js
+import Starter from "./tutorial/07-useRef/starter/01-useRef-basics.jsx";
+
+function App() {
+  return (
+    <div className="container">
+      <Starter />
+    </div>
+  );
+}
+
+export default App;
+```
+
+---
+
+- In tutorial/07-useRef/starter/01-useRef-basics.jsx
+
+- useRef DOES NOT TRIGGER RE-RENDER like useState whenever we update state
+- preserves the value between renders
+- target DOM nodes/elements
+- THINK: useRef value as a container that the mental model of Jhon
+
+```js
+import { useEffect, useRef, useState } from "react";
+
+const UseRefBasics = () => {
+  const [value, setValue] = useState(0);
+  const refContainer = useRef(null);
+
+  console.log(refContainer);
+  // {current:null}
+  // set value ourselves or DOM node
+
+  // useEffect(() => {
+  //    console.log(refContainer.current);
+  // });
+
+  const isMounted = useRef(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(refContainer.current);
+
+    // How to access useRef DOM node value
+    // DOM node aka JSX
+    const name = refContainer.current.value;
+    console.log(name);
+  };
+
+  return (
+    <div>
+      <form className="form" onSubmit={handleSubmit}>
+        <div className="form-row">
+          <label htmlFor="name" className="form-label">
+            Name
+          </label>
+          {/* How to use useRef in DOM node*/}
+          <input
+            type="text"
+            id="name"
+            ref={refContainer}
+            className="form-input"
+          />
+        </div>
+
+        <button type="submit" className="btn btn-block">
+          submit
+        </button>
+      </form>
+
+      <h1>value : {value}</h1>
+      <button onClick={() => setValue(value + 1)} className="btn">
+        increase
+      </button>
+    </div>
+  );
+};
+
+export default UseRefBasics;
+```
 
 <br>
 
 ### 134. useRef - Initial Render<a id='134'></a>
 
+- continue... 2 example
+
+- In tutorial/07-useRef/starter/01-useRef-basics.jsx
+
+- useRef DOES NOT TRIGGER RE-RENDER like useState whenever we update state
+- preserves the value between renders
+- target DOM nodes/elements
+- THINK: useRef value as a container that the mental model of Jhon
+
+```js
+import { useEffect, useRef, useState } from "react";
+
+const UseRefBasics = () => {
+  const [value, setValue] = useState(0);
+  const refContainer = useRef(null);
+  const isMounted = useRef(false);
+
+  console.log(refContainer);
+  // {current:null}
+  // set value ourselves or DOM node
+
+  useEffect(() => {
+    // console.log(refContainer.current);
+    refContainer.current.focus();
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(refContainer.current);
+
+    // How to access useRef DOM node value
+    // DOM node aka JSX
+    const name = refContainer.current.value;
+    console.log(name);
+  };
+
+  useEffect(() => {
+    if (!isMounted.current) {
+      isMounted.current = true;
+      return;
+    }
+    console.log("re-render");
+  }, [value]);
+
+  return (
+    <div>
+      <form className="form" onSubmit={handleSubmit}>
+        <div className="form-row">
+          <label htmlFor="name" className="form-label">
+            Name
+          </label>
+          {/* How to use useRef in DOM node*/}
+          <input
+            type="text"
+            id="name"
+            ref={refContainer}
+            className="form-input"
+          />
+        </div>
+
+        <button type="submit" className="btn btn-block">
+          submit
+        </button>
+      </form>
+
+      <h1>value : {value}</h1>
+      <button onClick={() => setValue(value + 1)} className="btn">
+        increase
+      </button>
+    </div>
+  );
+};
+
+export default UseRefBasics;
+```
+
 <br>
 
 ### 135. Matching Projects<a id='135'></a>
+
+- ref course read me
 
 <br>
 
 ### 136. Custom Hooks - Toggle<a id='136'></a>
 
+> **_Business Objective: Layout_**
+
+<img src="notes/togglehook.png" width="500">
+
+---
+
+- In src/App.jsx, import/render Starter component
+
+```js
+import Starter from "./tutorial/08-custom-hooks/starter/01-toggle.jsx";
+
+function App() {
+  return (
+    <div className="container">
+      <Starter />
+    </div>
+  );
+}
+
+export default App;
+```
+
+---
+
+- In /tutorial/08-custom-hooks/starter, create useToggle.js and write custom hook using useState hook
+
+```js
+import { useState } from "react";
+
+const useToggle = (defaultValue) => {
+  const [show, setShow] = useState(defaultValue);
+  const toggle = () => {
+    setShow(!show);
+  };
+  return { show, toggle };
+};
+
+export default useToggle;
+```
+
+---
+
+- In /tutorial/08-custom-hooks/starter/01-toggle.jsx, use custom hook
+
+```js
+import useToggle from "./useToggle";
+
+const ToggleExample = () => {
+  const { show, toggle } = useToggle(true);
+  return (
+    <div>
+      <h4>toggle custom hook</h4>
+      <button className="btn" onClick={toggle}>
+        toggle
+      </button>
+      {show && <h4>some stuff</h4>}
+    </div>
+  );
+};
+export default ToggleExample;
+```
+
 <br>
 
 ### 137. Custom Hooks - Fetch Person<a id='137'></a>
+
+> **_Business Objective: Layout_**
+
+<img src="notes/fetchdatahook.png" width="500">
+
+---
+
+- Challenge
+
+- in App.jsx import 02-fetch-data
+- take a look at the component
+- and try to setup custom fetch hook
+- hint :
+  hook should return isLoading,isError,user
+  and take url as parameter
+
+useFetchPerson.js
+
+- In src/App.jsx, import/render Starter component
+
+```js
+import Starter from "./tutorial/08-custom-hooks/starter/02-fetch-data.jsx";
+
+function App() {
+  return (
+    <div className="container">
+      <Starter />
+    </div>
+  );
+}
+
+export default App;
+```
+
+---
+
+- In tutorial/08-custom-hooks/starter, create useFetchPerson.js, and write custom hook
+
+```js
+import { useState, useEffect } from "react";
+
+const useFetchPerson = (url) => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const resp = await fetch(url);
+        // console.log(resp);
+        if (!resp.ok) {
+          setIsError(true);
+          setIsLoading(false);
+          return;
+        }
+
+        const user = await resp.json();
+        setUser(user);
+      } catch (error) {
+        setIsError(true);
+        // console.log(error);
+      }
+      // hide loading
+      setIsLoading(false);
+    };
+    fetchUser();
+  }, []);
+
+  return { isLoading, isError, user };
+};
+
+export default useFetchPerson;
+```
+
+---
+
+- In tutorial/08-custom-hooks/starter/02-fetch-data.jsx, use custom hook useFetch function
+
+```js
+import useFetchPerson from "./useFetchPerson";
+
+const url = "https://api.github.com/users/QuincyLarson";
+
+const FetchData = () => {
+  const { isLoading, isError, user } = useFetchPerson(url);
+
+  // order matters
+  // don't place user JSX before loading or error
+
+  if (isLoading) {
+    return <h2>Loading...</h2>;
+  }
+  if (isError) {
+    return <h2>There was an error...</h2>;
+  }
+  const { avatar_url, name, company, bio } = user;
+  return (
+    <div>
+      <img
+        style={{ width: "150px", borderRadius: "25px" }}
+        src={avatar_url}
+        alt={name}
+      />
+      <h2>{name}</h2>
+      <h4>works at {company}</h4>
+      <p>{bio}</p>
+    </div>
+  );
+};
+export default FetchData;
+```
 
 <br>
 
 ### 138. Custom Hooks - Generic Fetch<a id='138'></a>
 
+- In tutorial/08-custom-hooks/starter, create useFetch.js, generic custom hook function
+- Generic Fetch
+
+```js
+import { useState, useEffect } from "react";
+
+const useFetch = (url) => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+  // change state value
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    // change name
+    const fetchData = async () => {
+      try {
+        const resp = await fetch(url);
+
+        if (!resp.ok) {
+          setIsError(true);
+          setIsLoading(false);
+          return;
+        }
+        // change to response
+        const response = await resp.json();
+        setData(response);
+      } catch (error) {
+        setIsError(true);
+        // console.log(error);
+      }
+      // hide loading
+      setIsLoading(false);
+    };
+    // invoke fetch data
+    fetchData();
+  }, []);
+
+  return { isLoading, isError, data };
+};
+
+export default useFetch;
+```
+
+---
+
+- modify code use useFetch hook instead of useFetchPerson
+- In tutorial/08-custom-hooks/starter/02-fetch-data.jsx, use custom hook useFetch function
+
+```js
+import useFetch from "./useFetch";
+
+const url = "https://api.github.com/users/QuincyLarson";
+
+const FetchData = () => {
+  const { isLoading, isError, data: user } = useFetch(url);
+
+  // order matters
+  // don't place user JSX before loading or error
+
+  if (isLoading) {
+    return <h2>Loading...</h2>;
+  }
+  if (isError) {
+    return <h2>There was an error...</h2>;
+  }
+  const { avatar_url, name, company, bio } = user;
+  return (
+    <div>
+      <img
+        style={{ width: "150px", borderRadius: "25px" }}
+        src={avatar_url}
+        alt={name}
+      />
+      <h2>{name}</h2>
+      <h4>works at {company}</h4>
+      <p>{bio}</p>
+    </div>
+  );
+};
+export default FetchData;
+```
+
+---
+
 <br>
 
 ### 139. Context API - Challenge<a id='139'></a>
+
+- In src/App.jsx, import/render Starter component
+
+```js
+import Starter from "./tutorial/09-context-api/starter";
+
+function App() {
+  return (
+    <div className="container">
+      <Starter />
+    </div>
+  );
+}
+
+export default App;
+```
+
+```js
+import Starter from "./tutorial/09-context-api/starter";
+```
+
+Challenge
+
+- In starter folder create Navbar.jsx, NavLinks.jsx, UserContainer.jsx
+
+- create three components and nest them in such way :
+- Navbar.jsx
+
+  - NavLinks.jsx (nested in Navbar)
+    - UserContainer.jsx (nested in NavLinks)
+
+- import Navbar.jsx in App.jsx (remove container - CSS)
+- in Navbar.jsx setup
+  - user state value
+    - default value {name:'something'}
+  - logout function
+    - set user back to null
+- pass both of them down to UserContainer.jsx
+- display user and button
+- on button click set user back to null
+
+- extra challenge
+- if user null, in UserContainer display <p>please login</p>
+
+Navbar.jsx
+
+```js
+import { useState } from "react";
+import NavLinks from "./NavLinks";
+
+const Navbar = () => {
+  const [user, setUser] = useState({ name: "bob" });
+  const logout = () => {
+    setUser(null);
+  };
+  return (
+    <nav className="navbar">
+      <h5>CONTEXT API</h5>
+      <NavLinks user={user} logout={logout} />
+    </nav>
+  );
+};
+export default Navbar;
+```
+
+NavLinks.jsx
+
+```js
+import UserContainer from "./UserContainer";
+
+const NavLinks = ({ user, logout }) => {
+  return (
+    <div className="nav-container">
+      <ul className="nav-links">
+        <li>
+          <a href="#">home</a>
+        </li>
+        <li>
+          <a href="#">about</a>
+        </li>
+      </ul>
+      <UserContainer user={user} logout={logout} />
+    </div>
+  );
+};
+export default NavLinks;
+```
+
+UserContainer.jsx
+
+```js
+const UserContainer = ({ user, logout }) => {
+  return (
+    <div className="user-container">
+      {user ? (
+        <>
+          <p>Hello There, {user.name.toUpperCase()}</p>
+          <button type="button" className="btn" onClick={logout}>
+            logout
+          </button>
+        </>
+      ) : (
+        <p>Please Login</p>
+      )}
+    </div>
+  );
+};
+export default UserContainer;
+```
 
 <br>
 
